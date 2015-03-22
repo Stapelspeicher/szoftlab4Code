@@ -43,12 +43,8 @@ public class GameMap
 	public Cell getFreeNeighbouringCell(Position p)
 	{
 		Logger.enterFunction("getFreeNeigbouring(Position p)", this);
-		for (...)
-		{
-			c = cells.get(p);
-			if (c.isEmpty())
-				return c;
-		}
+		
+		
 
 		Logger.exitFunction();
 		return null;
