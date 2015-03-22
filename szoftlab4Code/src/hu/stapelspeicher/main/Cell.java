@@ -53,7 +53,7 @@ public class Cell {
 		Logger.enterFunction("getDistanceFromCell(Cell c)", this);
 		
 		int xDistance = c.pos.getX() - pos.getX();
-		int yDistance = c.pos.getX() - pos-getY();
+		int yDistance = c.pos.getY() - pos.getY();
 		if(xDistance < 0) xDistance *= -1;
 		if(yDistance < 0) yDistance *= -1;
 		

@@ -29,15 +29,15 @@ public class Robot implements ActiveObject {
 
 	public void placeOily() {
 		Logger.enterFunction("placeOily()", this);
-		if (oilyNum > 0)
+		if (oilNum > 0)
 			currCell.add(new Oily());
 		Logger.exitFunction();
 	}
 
 	public void addVelocity(Position p) {
-		Logger.enterFunction(addVelocity(Position p));
+		Logger.enterFunction("addVelocity(Position p)", this);
 		if(oily){
-			return
+			return;
 		}
 		else{
 			velocity.add(p);
@@ -47,7 +47,7 @@ public class Robot implements ActiveObject {
 
 	@Override
 	public void stepOn(ActiveObject ao) {
-		Logger.enterFunction("stepOn(ActiveObject ao)");
+		Logger.enterFunction("stepOn(ActiveObject ao)", this);
 		ao.collideWithRobot(this);
 		Logger.exitFunction();
 	}
