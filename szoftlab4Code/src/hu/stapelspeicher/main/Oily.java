@@ -7,7 +7,9 @@ public class Oily implements Trap
 	public void stepOn(ActiveObject ao)
 	{
 		// TODO Auto-generated method stub
+		Logger.enterFunction("stepOn(ActiveObject ao)", this);
 		ao.oilyEffect();
+		Logger.exitFunction();
 	}
 
 }

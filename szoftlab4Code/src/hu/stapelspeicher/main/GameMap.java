@@ -1,44 +1,36 @@
 package hu.stapelspeicher.main;
 
-import java.awt.Robot;
 import java.util.List;
 
-import javax.swing.text.Position;
-
-import com.sun.org.glassfish.gmbal.GmbalException;
+import com.sun.istack.internal.logging.Logger;
 
 public class GameMap
 {
-	private List<List<Cell>> cells;
+	private Cell[][] cells;
 	private int rounds;
 
 	public GameMap(Integer i1, Integer i2)
 	{
+		Logger.enterFunction("GameMap(Integer i1, Integer i2", this);
 		GameMap gm = new GameMap(i1, i2);
-		gm.addCell(Position p)
-		
-		Robot r = new Robot(z, e);
+		gm.addCell(p);
+		Robot r = new Robot();
 		gm.getCell(p).add(r);
+		Logger.exitFunction();
 	}
 
 	public Cell getCell(Position p)
 	{
-		if (true)
-		{
-			return p.x;
-			return p.y;
-		}
-
-		else
-			return null;
-
+		Logger.enterFunction("getCell(Position p)", this);
+		return cells[p.x][p.y];
+		Logger.exitFunction();
 	}
 
 	public void addCell(Position p)
 	{
-		p.x.getX();
-		p.x.getY();
-
+		Logger.enterFunction("addCell(Position p)", this);
+		cells[][] = new Cell(p.getX(), p.getY());
+		Logger.exitFunction();
 	}
 
 	public void terminate()
@@ -47,12 +39,14 @@ public class GameMap
 
 	public Cell getFreeNeighbouringCell(Position p)
 	{
+		Logger.enterFunction("getFreeNeigbouring(Position p)", this),
 		for (neighbour p : Position)
 		{
 			c = cells.get(p);
 			if (c.isEmpty())
 				return c;
 		}
+		Logger.exitFunction();
 		return null;
 
 	}
