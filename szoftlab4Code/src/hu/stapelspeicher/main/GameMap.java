@@ -6,9 +6,9 @@ import org.omg.PortableServer.ForwardRequestHelper;
 
 public class GameMap
 {
+
 	private Cell[][] cells;
 	private int rounds;
-	// private Cell c;
 	private Position pos = new Position(1, 1);
 
 	public GameMap(Integer i1, Integer i2)
@@ -21,7 +21,6 @@ public class GameMap
 				addCell(new Position(i, j));
 			}
 		}
-		// Robot r = new Robot(5, 5);
 		getCell(pos);
 		Logger.exitFunction();
 	}
@@ -56,26 +55,21 @@ public class GameMap
 		} else if ((cells[p.getX()][p.getY() + 1]).isEmpty() == true)
 		{
 			return cells[p.getX()][p.getY() + 1];
-		}
-		else if ((cells[p.getX()+1][p.getY() + 1]).isEmpty() == true)
+		} else if ((cells[p.getX() + 1][p.getY() + 1]).isEmpty() == true)
 		{
-			return cells[p.getX()+1][p.getY() + 1];
-		}
-		else if ((cells[p.getX()+1][p.getY() - 1]).isEmpty() == true)
+			return cells[p.getX() + 1][p.getY() + 1];
+		} else if ((cells[p.getX() + 1][p.getY() - 1]).isEmpty() == true)
 		{
-			return cells[p.getX()+1][p.getY() - 1];
-		}
-		else if ((cells[p.getX()-1][p.getY() + 1]).isEmpty() == true)
+			return cells[p.getX() + 1][p.getY() - 1];
+		} else if ((cells[p.getX() - 1][p.getY() + 1]).isEmpty() == true)
 		{
-			return cells[p.getX()-1][p.getY() + 1];
-		}
-		else if ((cells[p.getX()-1][p.getY() -1]).isEmpty() == true)
+			return cells[p.getX() - 1][p.getY() + 1];
+		} else if ((cells[p.getX() - 1][p.getY() - 1]).isEmpty() == true)
 		{
-			return cells[p.getX()-1][p.getY() -1];
-		}
-		else if (cells[p.getX()][p.getY()]==null)
+			return cells[p.getX() - 1][p.getY() - 1];
+		} else if (cells[p.getX()][p.getY()] == null)
 		{
-			
+
 		}
 		Logger.exitFunction();
 		return null;
