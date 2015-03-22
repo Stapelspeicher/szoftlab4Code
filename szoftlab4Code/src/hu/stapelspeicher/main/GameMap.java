@@ -57,6 +57,26 @@ public class GameMap
 		{
 			return cells[p.getX()][p.getY() + 1];
 		}
+		else if ((cells[p.getX()+1][p.getY() + 1]).isEmpty() == true)
+		{
+			return cells[p.getX()+1][p.getY() + 1];
+		}
+		else if ((cells[p.getX()+1][p.getY() - 1]).isEmpty() == true)
+		{
+			return cells[p.getX()+1][p.getY() - 1];
+		}
+		else if ((cells[p.getX()-1][p.getY() + 1]).isEmpty() == true)
+		{
+			return cells[p.getX()-1][p.getY() + 1];
+		}
+		else if ((cells[p.getX()-1][p.getY() -1]).isEmpty() == true)
+		{
+			return cells[p.getX()-1][p.getY() -1];
+		}
+		else if (cells[p.getX()][p.getY()]==null)
+		{
+			
+		}
 		Logger.exitFunction();
 		return null;
 
