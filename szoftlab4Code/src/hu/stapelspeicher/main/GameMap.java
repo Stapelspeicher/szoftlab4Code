@@ -8,7 +8,7 @@ public class GameMap
 {
 	private Cell[][] cells;
 	private int rounds;
-	private Cell c;
+	// private Cell c;
 	private Position pos = new Position(1, 1);
 
 	public GameMap(Integer i1, Integer i2)
@@ -43,9 +43,20 @@ public class GameMap
 	public Cell getFreeNeighbouringCell(Position p)
 	{
 		Logger.enterFunction("getFreeNeigbouring(Position p)", this);
-		
-		
 
+		if ((cells[p.getX() - 1][p.getY()]).isEmpty() == true)
+		{
+			return cells[p.getX()][p.getY()];
+		} else if ((cells[p.getX() + 1][p.getY()]).isEmpty() == true)
+		{
+			return cells[p.getX() + 1][p.getY()];
+		} else if ((cells[p.getX()][p.getY() - 1]).isEmpty() == true)
+		{
+			return cells[p.getX()][p.getY() - 1];
+		} else if ((cells[p.getX()][p.getY() + 1]).isEmpty() == true)
+		{
+			return cells[p.getX()][p.getY() + 1];
+		}
 		Logger.exitFunction();
 		return null;
 
