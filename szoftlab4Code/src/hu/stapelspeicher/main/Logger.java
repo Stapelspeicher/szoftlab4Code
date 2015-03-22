@@ -16,9 +16,12 @@ public class Logger {
 		depth += 1;
 		String name = objectNames.get(o.toString());
 		
-		if (name == null) name = " id: " + o.toString();
+		String short_id = o.toString().substring(o.toString().lastIndexOf(".") + 1,
+													o.toString().length());
+		
+		if (name == null) name = " id: " + short_id;
 		else {
-			name = " name: " + name + "Object id: " + o.toString();
+			name = " name: " + name + "Object id: " + short_id;
 		}
 		
 		System.out.println(o.getClass().getSimpleName() + "." + s + name);
