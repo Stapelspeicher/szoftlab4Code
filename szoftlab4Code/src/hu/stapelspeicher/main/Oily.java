@@ -1,11 +1,13 @@
 package hu.stapelspeicher.main;
 
-public class Oily implements Trap {
+public class Oily implements Trap
+{
 
 	@Override
-	public void stepOn(ActiveObject ao) {
+	public void stepOn(ActiveObject ao)
+	{
 		// TODO Auto-generated method stub
-
+		ao.oilyEffect();
 	}
 
 }
