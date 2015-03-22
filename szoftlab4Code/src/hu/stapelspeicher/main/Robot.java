@@ -8,10 +8,10 @@ public class Robot implements ActiveObject {
 	private int stickyNum;
 	private int oilNum;
 	private double distance;
-	private static int random = 0; // ez majd itt egy random szám kell hogy
-									// legyen, ami a robot kezdõpozícióját adja
-									// meg, de jelen esetben a tesztelés miatt
-									// egy nulláról inkrementálódó szám lesz
+	private static int random = 0; // ez majd itt egy random szam kell hogy
+									// legyen, ami a robot kezdopoziciojat adja
+									// meg, de jelen esetben a teszteles miatt
+									// egy nullarol inkrementalodo szam lesz
 
 	Robot(int stickyNum, int oilyNum) {
 		Logger.enterFunction("Robot(int stickyNum, int oilyNum()", this);
@@ -85,15 +85,13 @@ public class Robot implements ActiveObject {
 		Logger.enterFunction("die()", this);
 		currCell.remove(this);
 		Logger.exitFunction();
-	}
+	}	
 
 	@Override
-	public boolean setCell() {
+	public void setCell(Cell c) {
 		Logger.enterFunction("setCell()", this);
-		this.currCell = GameMap.getCell(new Position(random, random));
-		random++;
+		currCell = c;
 		Logger.exitFunction();
-		return true;
 	}
 
 	@Override
@@ -112,8 +110,8 @@ public class Robot implements ActiveObject {
 	@Override
 	public Cell getCell() {
 		Logger.enterFunction("getCell()", this);
-		return this.currCell;
 		Logger.exitFunction();
+		return this.currCell;
 	}
 
 }

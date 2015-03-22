@@ -6,7 +6,7 @@ public interface ActiveObject {
 	void stickyEffect();
 	void collideWithRobot(Robot other);
 	void die();
-	void setCell();
+	void setCell(Cell c);
 	void step();
-	void getCell();
+	Cell getCell();
 }
