@@ -1,27 +1,16 @@
 package hu.stapelspeicher.main;
 
-import java.util.List;
-
-import org.omg.PortableServer.ForwardRequestHelper;
 
 public class GameMap
 {
 
 	private Cell[][] cells;
 	private int rounds;
-	private Position pos = new Position(1, 1);
 
 	public GameMap(Integer i1, Integer i2)
 	{
 		Logger.enterFunction("GameMap(Integer i1, Integer i2)", this);
-		for (int i = 0; i < 10; i++)
-		{
-			for (int j = 0; j < 10; j++)
-			{
-				addCell(new Position(i, j));
-			}
-		}
-		getCell(pos);
+		cells = new Cell[i1][i2];
 		Logger.exitFunction();
 	}
 

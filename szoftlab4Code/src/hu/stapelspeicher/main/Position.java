@@ -22,29 +22,19 @@ public class Position {
 	
 	public Position divide(Position p) {
 		Logger.enterFunction("divide(Position p)", this);
-		
-		Position temp = new Position(0,0);
-		temp.x = this.x / p.x;
-		temp.y = this.y / p.y;
-		
 		Logger.exitFunction();
-		return temp;
+		return new Position(x / p.x,y / p.y);
 	}
 	
 	public Position add(Position p) {
 		Logger.enterFunction("add(Position p)", this);
-		
-		Position temp = new Position(0,0);
-		temp.x = this.x / p.x;
-		temp.y = this.y / p.y;
-		
 		Logger.exitFunction();
-		return temp;
+		return new Position(x + p.x,y + p.y);
 	}
 	
-	public double getDistance(Position p) { //TODO
+	public double getDistance(Position p) {
 		Logger.enterFunction("getDistance()", this);
 		Logger.exitFunction();
-		return 1;
+		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 	}
 }

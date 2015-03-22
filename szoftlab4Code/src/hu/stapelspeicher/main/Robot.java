@@ -7,11 +7,7 @@ public class Robot implements ActiveObject {
 	private boolean oily;
 	private int stickyNum;
 	private int oilNum;
-	private double distance;
-	private static int random = 0; // ez majd itt egy random szam kell hogy
-									// legyen, ami a robot kezdopoziciojat adja
-									// meg, de jelen esetben a teszteles miatt
-									// egy nullarol inkrementalodo szam lesz
+	private double distance = 0;
 
 	Robot(int stickyNum, int oilyNum) {
 		Logger.enterFunction("Robot(int stickyNum, int oilyNum()", this);
@@ -62,7 +58,7 @@ public class Robot implements ActiveObject {
 	@Override
 	public void stickyEffect() {
 		Logger.enterFunction("stickyEffect()", this);
-		this.velocity.divide(new Position(2, 2));
+		velocity = velocity.divide(new Position(2, 2));
 		Logger.exitFunction();
 	}
 
@@ -89,7 +85,7 @@ public class Robot implements ActiveObject {
 
 	@Override
 	public void setCell(Cell c) {
-		Logger.enterFunction("setCell()", this);
+		Logger.enterFunction("setCell(Cell c)", this);
 		currCell = c;
 		Logger.exitFunction();
 	}
