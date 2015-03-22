@@ -12,7 +12,12 @@ public class Cell {
 		Logger.enterFunction("add(ActiveObject ao)", this);
 		
 		actors.add(ao);
-		
+		trap.stepOn(ao);
+		for(ActiveObject actor : actors) {
+			if(actor != ao) {
+				actor.stepOn(ao);
+			}
+		}
 		Logger.exitFunction();
 	}
 	
@@ -26,13 +31,12 @@ public class Cell {
 	
 	public Cell getCellFromHere(Position p) {
 		Logger.enterFunction("getCellFromHere(Position p)", this);		
-		
-		int newX = p.getX() + p.getX();
-		int newY = p.getY() + p.getY();
-		map.getCell(new Position(newX, newY));
+
+		map.getCell(pos.add(p));
 		
 		Logger.exitFunction();
-		return null;}
+		return null;
+		}
 	
 	public void remove(ActiveObject ao) {
 		Logger.enterFunction("remove(ActiveObject ao)", this);
@@ -63,32 +67,8 @@ public class Cell {
 	
 	public Cell getFreeNeighbouringCell() {
 		Logger.enterFunction("getFreeNeighbouringCell()", this);
-		
-		Position newPos = new Position(pos.getX(), pos.getY());
-		newPos.add(new Position(0,1));
-		if(map.getCell(newPos).isEmpty()) {
-			Logger.exitFunction();
-			return map.getCell(newPos);
-		}
-		newPos.add(new Position(1,-1));
-		if(map.getCell(newPos).isEmpty()) {
-			Logger.exitFunction();
-			return map.getCell(newPos);
-		}
-		newPos.add(new Position(-1,-1));
-		if(map.getCell(newPos).isEmpty()) {
-			Logger.exitFunction();
-			return map.getCell(newPos);
-		}
-		newPos.add(new Position(-1,1));
-		if(map.getCell(newPos).isEmpty()) {
-			Logger.exitFunction();
-			return map.getCell(newPos);
-		}
-			
-		
 		Logger.exitFunction();
-		return null;
+		return map.getFreeNeighbouringCell(pos);
 	}
 	
 }
