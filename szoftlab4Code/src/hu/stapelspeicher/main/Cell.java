@@ -27,8 +27,8 @@ public class Cell {
 	public Cell getCellFromHere(Position p) {
 		Logger.enterFunction("getCellFromHere(Position p)", this);		
 		
-		int newX = pos.getX() + p.getX();
-		int newY = pos.getY() + p.getY();
+		int newX = p.getX() + p.getX();
+		int newY = p.getY() + p.getY();
 		map.getCell(new Position(newX, newY));
 		
 		Logger.exitFunction();

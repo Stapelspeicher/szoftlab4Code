@@ -12,10 +12,15 @@ public class GameMap
 	public GameMap(Integer i1, Integer i2)
 	{
 		Logger.enterFunction("GameMap(Integer i1, Integer i2", this);
-		GameMap gm = new GameMap(i1, i2);
-		gm.addCell(p);
-		Robot r = new Robot();
-		gm.getCell(p).add(r);
+		for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				addCell(new Position(i, j));
+			}
+		}
+		Robot r = new Robot(5, 5);
+		getCell().add(r);
 		Logger.exitFunction();
 	}
 
@@ -29,18 +34,14 @@ public class GameMap
 	public void addCell(Position p)
 	{
 		Logger.enterFunction("addCell(Position p)", this);
-		cells[][] = new Cell(p.getX(), p.getY());
+		cells[p.getX()][p.getY()] = new Cell();
 		Logger.exitFunction();
-	}
-
-	public void terminate()
-	{
 	}
 
 	public Cell getFreeNeighbouringCell(Position p)
 	{
 		Logger.enterFunction("getFreeNeigbouring(Position p)", this),
-		for (neighbour p : Position)
+		for(neighbour p : Position)
 		{
 			c = cells.get(p);
 			if (c.isEmpty())
