@@ -7,6 +7,11 @@ public class GameMap
 	private Cell[][] cells;
 	private int rounds;
 
+	private Position pos = new Position(1, 1);
+	private int xlength;
+	private int ylength;
+
+
 	public GameMap(Integer i1, Integer i2)
 	{
 		Logger.enterFunction("GameMap(Integer i1, Integer i2)", this);
@@ -31,35 +36,38 @@ public class GameMap
 	public Cell getFreeNeighbouringCell(Position p)
 	{
 		Logger.enterFunction("getFreeNeigbouring(Position p)", this);
-
-		if ((cells[p.getX() - 1][p.getY()]).isEmpty() == true)
+		
+		xlength = cells.length;
+		ylength = cells[0].length;
+		
+		
+		if ((cells[p.getX() - 1][p.getY()]).isEmpty() && cells[p.getX() - 1][p.getY()] != null && p.getX()-1 >= 0)
 		{
-			return cells[p.getX()][p.getY()];
-		} else if ((cells[p.getX() + 1][p.getY()]).isEmpty() == true)
+			return cells[p.getX()-1][p.getY()];
+		} else if ((cells[p.getX() + 1][p.getY()]).isEmpty() && cells[p.getX() + 1][p.getY()] != null && p.getX()+1 <= xlength)
 		{
 			return cells[p.getX() + 1][p.getY()];
-		} else if ((cells[p.getX()][p.getY() - 1]).isEmpty() == true)
+		} else if ((cells[p.getX()][p.getY() - 1]).isEmpty() && cells[p.getX()][p.getY() - 1] != null && p.getY()-1 >= 0)
 		{
 			return cells[p.getX()][p.getY() - 1];
-		} else if ((cells[p.getX()][p.getY() + 1]).isEmpty() == true)
+		} else if ((cells[p.getX()][p.getY() + 1]).isEmpty() && cells[p.getX()][p.getY() + 1] != null && p.getY() <= ylength)
 		{
 			return cells[p.getX()][p.getY() + 1];
-		} else if ((cells[p.getX() + 1][p.getY() + 1]).isEmpty() == true)
+		} else if ((cells[p.getX() + 1][p.getY() + 1]).isEmpty() && cells[p.getX() + 1][p.getY() + 1] != null && p.getX()+1 <= xlength && p.getY()+1 <= ylength )
 		{
 			return cells[p.getX() + 1][p.getY() + 1];
-		} else if ((cells[p.getX() + 1][p.getY() - 1]).isEmpty() == true)
+		} else if ((cells[p.getX() + 1][p.getY() - 1]).isEmpty() && cells[p.getX() + 1][p.getY() - 1] != null && p.getX()+1 <= xlength && p.getY()-1 >= 0)
 		{
 			return cells[p.getX() + 1][p.getY() - 1];
-		} else if ((cells[p.getX() - 1][p.getY() + 1]).isEmpty() == true)
+		} else if ((cells[p.getX() - 1][p.getY() + 1]).isEmpty() && cells[p.getX() - 1][p.getY() + 1] != null && p.getX()-1 >= 0 && p.getY()+1 <= ylength)
 		{
 			return cells[p.getX() - 1][p.getY() + 1];
-		} else if ((cells[p.getX() - 1][p.getY() - 1]).isEmpty() == true)
+		} else if ((cells[p.getX() - 1][p.getY() - 1]).isEmpty() && cells[p.getX() - 1][p.getY() - 1] != null && p.getX()-1 >= 0 && p.getY()-1 >= 0)
 		{
 			return cells[p.getX() - 1][p.getY() - 1];
-		} else if (cells[p.getX()][p.getY()] == null)
-		{
-
-		}
+		} 
+		
+		
 		Logger.exitFunction();
 		return null;
 
