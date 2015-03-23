@@ -1,18 +1,36 @@
 package hu.stapelspeicher.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cell {
-	private List<ActiveObject> actors;
-	private Trap trap;
+	private List<ActiveObject> actors= new ArrayList<ActiveObject>();
+	private Trap trap=null;
 	private Position pos;
 	private GameMap map;
+	
+	public void setPosition(Position pos){
+		Logger.enterFunction("setPosition(Position pos)", this);
+		
+		this.pos = pos;
+		
+		Logger.exitFunction();
+	}
+	
+	public void setMap(GameMap gm){
+		Logger.enterFunction("setMap(GameMap gm)", this);
+		
+		this.map = gm;
+		
+		Logger.exitFunction();
+	}
 	
 	public void add(ActiveObject ao) {
 		Logger.enterFunction("add(ActiveObject ao)", this);
 		
 		actors.add(ao);
-		trap.stepOn(ao);
+		if(trap!=null)
+			trap.stepOn(ao);
 		for(ActiveObject actor : actors) {
 			if(actor != ao) {
 				actor.stepOn(ao);

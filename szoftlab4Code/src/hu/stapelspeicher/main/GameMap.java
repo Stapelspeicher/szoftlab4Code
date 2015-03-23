@@ -11,11 +11,18 @@ public class GameMap
 	private int xlength;
 	private int ylength;
 
-
-	public GameMap(Integer i1, Integer i2)
+	
+	public void setRounds(int rounds){
+		Logger.enterFunction("setRounds(int rounds)", this);
+		this.rounds = rounds;
+		Logger.exitFunction();
+	}
+	
+	public GameMap(Integer x, Integer y)
 	{
-		Logger.enterFunction("GameMap(Integer i1, Integer i2)", this);
-		cells = new Cell[i1][i2];
+		Logger.enterFunction("GameMap(Integer x, Integer y)", this);
+		cells = new Cell[x][y];
+		rounds=10;
 		Logger.exitFunction();
 	}
 
@@ -29,7 +36,9 @@ public class GameMap
 	public void addCell(Position p)
 	{
 		Logger.enterFunction("addCell(Position p)", this);
-		cells[p.getX()][p.getY()] = new Cell();
+		Cell c = new Cell();
+		c.setPosition(p);
+		cells[p.getX()][p.getY()] = c;
 		Logger.exitFunction();
 	}
 

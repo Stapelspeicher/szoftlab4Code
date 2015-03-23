@@ -13,6 +13,7 @@ public class Robot implements ActiveObject {
 		Logger.enterFunction("Robot(int stickyNum, int oilyNum()", this);
 		this.stickyNum = stickyNum;
 		this.oilNum = oilyNum;
+		velocity = new Position(0, 0);
 		Logger.exitFunction();
 	}
 
