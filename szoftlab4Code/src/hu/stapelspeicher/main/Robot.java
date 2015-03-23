@@ -1,5 +1,9 @@
 package hu.stapelspeicher.main;
 
+/**
+ * @author Ádám
+ *
+ */
 public class Robot implements ActiveObject {
 
 	private Position velocity;
@@ -9,6 +13,11 @@ public class Robot implements ActiveObject {
 	private int oilNum;
 	private double distance = 0;
 
+	/**
+	 * A robot osztaly ketparameteres konstruktora
+	 * @param stickyNum - a robot hany ragaccsal indul
+	 * @param oilyNum - a robot hany olajjal indul
+	 */
 	Robot(int stickyNum, int oilyNum) {
 		Logger.enterFunction("Robot(int stickyNum, int oilyNum()", this);
 		this.stickyNum = stickyNum;
@@ -17,6 +26,9 @@ public class Robot implements ActiveObject {
 		Logger.exitFunction();
 	}
 
+	/**
+	 * A robot elhelyezi a ragacsot, amennyiben van neki legalabb egy elhelyezheto ragacsa
+	 */
 	public void placeSticky() {
 		Logger.enterFunction("placeSticky()", this);
 		if (stickyNum > 0)
@@ -24,6 +36,9 @@ public class Robot implements ActiveObject {
 		Logger.exitFunction();
 	}
 
+	/**
+	 * A robot elhelyezi az olajfoltot, amennyiben van neki legalabb egy elhelyezheto olaja
+	 */
 	public void placeOily() {
 		Logger.enterFunction("placeOily()", this);
 		if (oilNum > 0)
@@ -31,6 +46,10 @@ public class Robot implements ActiveObject {
 		Logger.exitFunction();
 	}
 
+	/**
+	 * Amennyiben nem olajfolton all a robot, akkor megvaltozik a sebessege
+	 * @param p - ez hatarozza meg, hogy mennyivel es milyen iranyba valtozik meg a sebesseg
+	 */
 	public void addVelocity(Position p) {
 		Logger.enterFunction("addVelocity(Position p)", this);
 		if(oily){
@@ -42,6 +61,9 @@ public class Robot implements ActiveObject {
 		Logger.exitFunction();
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.main.ActiveObject#stepOn(hu.stapelspeicher.main.ActiveObject)
+	 */
 	@Override
 	public void stepOn(ActiveObject ao) {
 		Logger.enterFunction("stepOn(ActiveObject ao)", this);
@@ -56,6 +78,9 @@ public class Robot implements ActiveObject {
 		Logger.exitFunction();
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.main.ActiveObject#stickyEffect()
+	 */
 	@Override
 	public void stickyEffect() {
 		Logger.enterFunction("stickyEffect()", this);
@@ -63,6 +88,9 @@ public class Robot implements ActiveObject {
 		Logger.exitFunction();
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.main.ActiveObject#collideWithRobot(hu.stapelspeicher.main.Robot)
+	 */
 	@Override
 	public void collideWithRobot(Robot other) {
 		Logger.enterFunction("collideWithRobot(Robot other)", this);
@@ -77,6 +105,9 @@ public class Robot implements ActiveObject {
 		Logger.exitFunction();
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.main.ActiveObject#die()
+	 */
 	@Override
 	public void die() {
 		Logger.enterFunction("die()", this);
@@ -84,6 +115,9 @@ public class Robot implements ActiveObject {
 		Logger.exitFunction();
 	}	
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.main.ActiveObject#setCell(hu.stapelspeicher.main.Cell)
+	 */
 	@Override
 	public void setCell(Cell c) {
 		Logger.enterFunction("setCell(Cell c)", this);
@@ -91,6 +125,9 @@ public class Robot implements ActiveObject {
 		Logger.exitFunction();
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.main.ActiveObject#step()
+	 */
 	@Override
 	public void step() {
 		Logger.enterFunction("step()", this);
@@ -104,6 +141,9 @@ public class Robot implements ActiveObject {
 		Logger.exitFunction();
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.main.ActiveObject#getCell()
+	 */
 	@Override
 	public Cell getCell() {
 		Logger.enterFunction("getCell()", this);
