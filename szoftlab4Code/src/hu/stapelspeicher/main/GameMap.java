@@ -76,6 +76,9 @@ public class GameMap
 	public boolean decrementRounds()
 	{
 		rounds--;
-		return decrementRounds();
+		if(rounds>0)
+			return true;
+		else
+			return false;
 	}
 }
