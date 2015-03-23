@@ -7,7 +7,7 @@ public class GameMap
 	private Cell[][] cells;
 	private int rounds;
 
-	private Position pos = new Position(1, 1);
+	
 	private int xlength;
 	private int ylength;
 
@@ -76,6 +76,6 @@ public class GameMap
 	public boolean decrementRounds()
 	{
 		rounds--;
-		return false;
+		return decrementRounds();
 	}
 }
