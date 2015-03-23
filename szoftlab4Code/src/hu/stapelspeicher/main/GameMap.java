@@ -11,13 +11,21 @@ public class GameMap
 	private int xlength;
 	private int ylength;
 
-	
+	/**
+	 * Beallit egy bizonyos mennyisegu korszamot a jatek elejen
+	 * @param rounds Adott szamu kor beallitasa a jatek kezdetere
+	 */
 	public void setRounds(int rounds){
 		Logger.enterFunction("setRounds(int rounds)", this);
 		this.rounds = rounds;
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * A GameMap ket parameteres konstruktora
+	 * @param x A palya nagysaga vizszintesen
+	 * @param y A palya nagysaga fuggolegesen
+	 */
 	public GameMap(Integer x, Integer y)
 	{
 		Logger.enterFunction("GameMap(Integer x, Integer y)", this);
@@ -28,6 +36,11 @@ public class GameMap
 		Logger.exitFunction();
 	}
 
+	/**
+	 * Egy cella lekerese
+	 * @param p Adott pozicioju cella lekerese
+	 * @return A cella x es y koordinatai
+	 */
 	public Cell getCell(Position p)
 	{
 		Logger.enterFunction("getCell(Position p)", this);
@@ -35,6 +48,10 @@ public class GameMap
 		return cells[p.getX()][p.getY()];
 	}
 
+	/**
+	 * Cella hozzaadasa
+	 * @param p A cella poziciojanak kijelolese
+	 */
 	public void addCell(Position p)
 	{
 		Logger.enterFunction("addCell(Position p)", this);
@@ -44,6 +61,11 @@ public class GameMap
 		Logger.exitFunction();
 	}
 
+	/**
+	 * Lekerhetoek egy adott cella ures szomszedos cellai
+	 * @param p A cella pozicioja, aminek ures szomszedjait keressuk
+	 * @return Ures szomszedos cellak
+	 */
 	public Cell getFreeNeighbouringCell(Position p)
 	{
 		Logger.enterFunction("getFreeNeigbouring(Position p)", this);
@@ -111,6 +133,10 @@ public class GameMap
 
 	}
 
+	/**
+	 * Korok szamanak csokkentese
+	 * @return Ha meg nem fogytak el a korok, akkor true, ha mar elfogytak, akkor false
+	 */
 	public boolean decrementRounds()
 	{
 		rounds--;

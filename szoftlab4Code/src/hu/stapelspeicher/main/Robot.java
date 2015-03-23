@@ -1,7 +1,7 @@
 package hu.stapelspeicher.main;
 
 /**
- * @author Ádám
+ * @author Ă�dĂˇm
  *
  */
 public class Robot implements ActiveObject {
