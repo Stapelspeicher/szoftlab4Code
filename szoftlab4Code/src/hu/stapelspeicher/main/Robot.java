@@ -37,7 +37,7 @@ public class Robot implements ActiveObject {
 			return;
 		}
 		else{
-			velocity.add(p);
+			velocity = velocity.add(p);
 		}
 		Logger.exitFunction();
 	}

@@ -49,11 +49,11 @@ public class Cell {
 	
 	public Cell getCellFromHere(Position p) {
 		Logger.enterFunction("getCellFromHere(Position p)", this);		
-
-		map.getCell(pos.add(p));
+		
+		Cell c = map.getCell(pos.add(p));
 		
 		Logger.exitFunction();
-		return null;
+		return c;
 		}
 	
 	public void remove(ActiveObject ao) {

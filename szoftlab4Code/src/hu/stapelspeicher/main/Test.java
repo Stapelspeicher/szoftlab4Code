@@ -7,35 +7,74 @@ public class Test {
 	private static Scanner in;
 	
 	public static void main(String[] args) {
-		
 		in = new Scanner(System.in);
 		int chosenIndex=0;
-		chosenIndex = printIndex();
 		
-		switch (chosenIndex) {
-		case 1:
-			launchGame();
+		while(chosenIndex!=8){
+			chosenIndex = printIndex();
+			switch (chosenIndex) {
+			case 1:
+				launchGame();
+				break;
+			case 2:
+				changeRobotSpeed();
+				break;
+			case 3:
+				placeOily();
+				break;
+			case 4:
+				placeSticky();
+				break;
+			case 5:
+				nextRound();
+				break;
+			case 6:
+				step();
+				break;
+			case 7:
+				collision();
+			default:
+				break;
+			}
+		}
+
+		in.close();
+	}
+	
+	private static void collision(){
+		System.out.print("Van eleg hely a szomszed cellakban? (I/N) ");
+		char c = in.next().charAt(0);
+		
+		Logger.enterFunction("collision()", Test.class);
+		
+		GameMap gm = new GameMap(10, 10);
+		for(int i=0;i<3;i++){
+			gm.addCell(new Position(0, i));
+			gm.getCell(new Position(0, i)).setMap(gm);
+		}
+		Robot r1 = new Robot(0, 0);
+		Robot r2 = new Robot(0, 0);
+		r1.setCell(gm.getCell(new Position(0, 0)));
+		r2.setCell(gm.getCell(new Position(0, 2)));
+		r1.addVelocity(new Position(0, 1));
+		r2.addVelocity(new Position(0, -1));
+		
+		switch (c) {
+		case 'I':
+			gm.addCell(new Position(1, 1));
+			gm.getCell(new Position(1, 1)).setMap(gm);
+			r1.step();
+			r2.step();
 			break;
-		case 2:
-			changeRobotSpeed();
-			break;
-		case 3:
-			placeOily();
-			break;
-		case 4:
-			placeSticky();
-			break;
-		case 5:
-			nextRound();
-			break;
-		case 6:
-			step();
+		case 'N':
+			r1.step();
+			r2.step();
 			break;
 		default:
 			break;
 		}
 		
-		in.close();
+		Logger.exitFunction();
 	}
 	
 	private static void step(){
@@ -57,15 +96,52 @@ public class Test {
 				stepsOnStickyCell();
 				break;
 			case 3:
-				
+				stepsOnOilyCell();
 				break;
 			case 4:
-				
+				stepsOnEmptyCell();
 				break;
 			default:
 				break;
 			}
 		}
+	}
+
+	private static void stepsOnEmptyCell(){
+		Logger.enterFunction("stepsOnEmptyCell()", Test.class);
+		
+		GameMap gm = new GameMap(10, 10);
+		gm.addCell(new Position(0, 0));
+		Cell c = gm.getCell(new Position(0, 0));
+		c.setMap(gm);
+		
+		Robot r = new Robot(0,0);
+		r.setCell(c);
+		r.addVelocity(new Position(0, 1));
+		r.step();	
+		
+		Logger.exitFunction();
+	}
+	
+	private static void stepsOnOilyCell(){
+		Logger.enterFunction("stepsOnOilyCell()", Test.class);
+		
+		GameMap gm = new GameMap(10, 10);
+		gm.addCell(new Position(0, 0));
+		gm.addCell(new Position(0, 1));
+		Cell c = gm.getCell(new Position(0, 0));
+		Cell c2 = gm.getCell(new Position(0, 1));
+		c.setMap(gm);
+		c2.setMap(gm);
+		Oily o = new Oily();
+		c2.add(o);
+		
+		Robot r = new Robot(0,0);
+		r.setCell(c);
+		r.addVelocity(new Position(0, 1));
+		r.step();	
+		
+		Logger.exitFunction();
 	}
 	
 	private static void stepsOnStickyCell(){
@@ -74,12 +150,15 @@ public class Test {
 		GameMap gm = new GameMap(10, 10);
 		gm.addCell(new Position(0, 0));
 		gm.addCell(new Position(0, 1));
-		Robot r = new Robot(0,0);
 		Cell c = gm.getCell(new Position(0, 0));
-		r.setCell(c);
-		Sticky s = new Sticky();
+		Cell c2 = gm.getCell(new Position(0, 1));
 		c.setMap(gm);
-		c.add(s);
+		c2.setMap(gm);
+		Sticky s = new Sticky();
+		c2.add(s);
+		
+		Robot r = new Robot(0,0);
+		r.setCell(c);
 		r.addVelocity(new Position(0, 1));
 		r.step();	
 		
@@ -92,10 +171,11 @@ public class Test {
 		GameMap gm = new GameMap(10, 10);
 		gm.addCell(new Position(0, 0));
 		gm.addCell(new Position(0, 1));
-		Robot r = new Robot(0,0);
 		Cell c = gm.getCell(new Position(0, 0));
-		r.setCell(c);
 		c.setMap(gm);
+		
+		Robot r = new Robot(0,0);
+		r.setCell(c);
 		r.addVelocity(new Position(0, 1));
 		r.step();	
 		
@@ -137,7 +217,7 @@ public class Test {
 		
 		switch (c) {
 		case 'I':
-			r = new Robot(0, 1);
+			r = new Robot(1, 0);
 			cell.add(r);
 			r.setCell(cell);
 			r.placeSticky();
@@ -228,7 +308,6 @@ public class Test {
 			case 1:
 				createCell();
 				break;
-				
 			case 2:
 				createRobot();
 				break;
@@ -240,12 +319,13 @@ public class Test {
 		
 	}
 	
-	private static void createRobot(){
-		Logger.enterFunction("createRobot()", Test.class);
-		
+	private static void createRobot(){		
 		System.out.println("Ragacs es olaj szama szokozzel elvalasztva:");
 		int sticky = in.nextInt();
 		int oily = in.nextInt();
+		
+		Logger.enterFunction("createRobot()", Test.class);
+		
 		GameMap gm = new GameMap(10, 10);
 		gm.addCell(new Position(0,0));
 		Robot r = new Robot(sticky, oily);
@@ -255,12 +335,13 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
-	private static void createCell(){
-		Logger.enterFunction("createCell()", Test.class);
-		
+	private static void createCell(){		
 		System.out.println("Cella koordinatai szokozzel elvalasztva:");
 		int x = in.nextInt();
 		int y = in.nextInt();
+		
+		Logger.enterFunction("createCell()", Test.class);
+		
 		GameMap gm = new GameMap(10, 10);
 		gm.addCell(new Position(x, y));
 		

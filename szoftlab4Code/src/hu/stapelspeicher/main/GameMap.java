@@ -22,6 +22,8 @@ public class GameMap
 	{
 		Logger.enterFunction("GameMap(Integer x, Integer y)", this);
 		cells = new Cell[x][y];
+		xlength = x;
+		ylength = y;
 		rounds=10;
 		Logger.exitFunction();
 	}
@@ -46,36 +48,63 @@ public class GameMap
 	{
 		Logger.enterFunction("getFreeNeigbouring(Position p)", this);
 		
-		xlength = cells.length;
-		ylength = cells[0].length;
+		Cell c;
 		
+		if(p.getX()>0){
+			c=cells[p.getX()-1][p.getY()];
+			if(c != null)
+				if(c.isEmpty())
+					return c;
+		}
+
+		if(p.getY()>0){
+			c=cells[p.getX()][p.getY()-1];
+			if(c != null)
+				if(c.isEmpty())
+					return c;
+		}
 		
-		if ((cells[p.getX() - 1][p.getY()]).isEmpty() && cells[p.getX() - 1][p.getY()] != null && p.getX()-1 >= 0)
-		{
-			return cells[p.getX()-1][p.getY()];
-		} else if ((cells[p.getX() + 1][p.getY()]).isEmpty() && cells[p.getX() + 1][p.getY()] != null && p.getX()+1 <= xlength)
-		{
-			return cells[p.getX() + 1][p.getY()];
-		} else if ((cells[p.getX()][p.getY() - 1]).isEmpty() && cells[p.getX()][p.getY() - 1] != null && p.getY()-1 >= 0)
-		{
-			return cells[p.getX()][p.getY() - 1];
-		} else if ((cells[p.getX()][p.getY() + 1]).isEmpty() && cells[p.getX()][p.getY() + 1] != null && p.getY() <= ylength)
-		{
-			return cells[p.getX()][p.getY() + 1];
-		} else if ((cells[p.getX() + 1][p.getY() + 1]).isEmpty() && cells[p.getX() + 1][p.getY() + 1] != null && p.getX()+1 <= xlength && p.getY()+1 <= ylength )
-		{
-			return cells[p.getX() + 1][p.getY() + 1];
-		} else if ((cells[p.getX() + 1][p.getY() - 1]).isEmpty() && cells[p.getX() + 1][p.getY() - 1] != null && p.getX()+1 <= xlength && p.getY()-1 >= 0)
-		{
-			return cells[p.getX() + 1][p.getY() - 1];
-		} else if ((cells[p.getX() - 1][p.getY() + 1]).isEmpty() && cells[p.getX() - 1][p.getY() + 1] != null && p.getX()-1 >= 0 && p.getY()+1 <= ylength)
-		{
-			return cells[p.getX() - 1][p.getY() + 1];
-		} else if ((cells[p.getX() - 1][p.getY() - 1]).isEmpty() && cells[p.getX() - 1][p.getY() - 1] != null && p.getX()-1 >= 0 && p.getY()-1 >= 0)
-		{
-			return cells[p.getX() - 1][p.getY() - 1];
-		} 
+		if(p.getX()<xlength-1){
+			c=cells[p.getX()+1][p.getY()];
+			if(c != null)
+				if(c.isEmpty())
+					return c;
+		}
 		
+		if(p.getY()<ylength-1){
+			c=cells[p.getX()][p.getY()+1];
+			if(c != null)
+				if(c.isEmpty())
+					return c;
+		}
+		
+		if(p.getX()>0 && p.getY()>0){
+			c=cells[p.getX()-1][p.getY()-1];
+			if(c != null)
+				if(c.isEmpty())
+					return c;
+		}
+		
+		if(p.getX()<xlength-1 && p.getY()>0){
+			c=cells[p.getX()+1][p.getY()-1];
+			if(c != null)
+				if(c.isEmpty())
+					return c;
+		}
+		
+		if(p.getX()>0 && p.getY()<ylength-1){
+			c=cells[p.getX()-1][p.getY()+1];
+			if(c != null)
+				if(c.isEmpty())
+					return c;
+		}
+		
+		if(p.getX()<xlength-1 && p.getY()<ylength-1){
+			c=cells[p.getX()+1][p.getY()+1];
+			if(c != null)
+				if(c.isEmpty())
+					return c;
+		}
 		
 		Logger.exitFunction();
 		return null;

@@ -6,6 +6,8 @@ public class Position {
 	
 	public Position(int x, int y) {
 		Logger.enterFunction("Position(int x, int y)", this);
+		this.x = x;
+		this.y = y;
 		Logger.exitFunction();
 	}
 	
@@ -23,7 +25,7 @@ public class Position {
 	public Position divide(Position p) {
 		Logger.enterFunction("divide(Position p)", this);
 		Logger.exitFunction();
-		return new Position(x / p.x,y / p.y);
+		return new Position(x / p.x, y / p.y);
 	}
 	
 	public Position add(Position p) {
