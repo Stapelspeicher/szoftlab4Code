@@ -18,14 +18,14 @@ public class Logger {
 		
 		String short_id = o.toString().substring(o.toString().lastIndexOf(".") + 1,
 													o.toString().length());
-		
+		// ha objektum metodus
 		if(short_id.contains("@")) {
 			if (name == null) name = " id: " + short_id;
-			else {
+			else { // ha van specko neve
 				name = " name: " + name + "Object id: " + short_id;
 			}
 			System.out.println(o.getClass().getSimpleName() + "." + s + name);
-		} else {
+		} else { // ha osztalymetodus
 			System.out.println(short_id + "." + s);
 		}
 	}
