@@ -38,8 +38,8 @@ public class GameMap
 
 	/**
 	 * Egy cella lekerese
-	 * @param p Adott pozicioju cella lekerese
-	 * @return A cella x es y koordinatai
+	 * @param p Adott pozicioju cella
+	 * @return A kert cella
 	 */
 	public Cell getCell(Position p)
 	{
@@ -62,9 +62,9 @@ public class GameMap
 	}
 
 	/**
-	 * Lekerhetoek egy adott cella ures szomszedos cellai
+	 * Az atadott pozicio korul visszaad egy ures celat, vagy nullt, ha nincs ilyen
 	 * @param p A cella pozicioja, aminek ures szomszedjait keressuk
-	 * @return Ures szomszedos cellak
+	 * @return Ures szomszedos cella
 	 */
 	public Cell getFreeNeighbouringCell(Position p)
 	{
