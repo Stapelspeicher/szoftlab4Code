@@ -41,8 +41,9 @@ public class Cell {
 	}
 	
 	/**
-	 * A cellan egy ujabb mozgo objektumot helyez el
-	 * es a szukseges utkozteteseket elvegzi a mozgo objektumok
+	 * A cellan egy ujabb mozgo objektumot helyez el,
+	 * ha a cellan folt talahato kifejti hatasat a mozgo objektumra,
+	 * majd a mozgo objektumokat utkozteti
 	 * es foltok kozott
 	 * @param ao Az uj mozgo objektum
 	 */
@@ -61,7 +62,7 @@ public class Cell {
 	}
 	
 	/**
-	 * A cellan egy uj foltot helyez el
+	 * A cellan egy uj foltot helyez el, az elozo folt eltunik
 	 * @param t Az uj folt
 	 */
 	public void add(Trap t) {
@@ -73,9 +74,10 @@ public class Cell {
 	}
 	
 	/**
-	 * A cellatol megadott tavolsagra levo cellat adja meg
-	 * @param p A megadott tavolsag
-	 * @return Az uj cella
+	 * A cellatol megadott vektor tavolsagra levo cellat adja meg,
+	 * amit a GameMap-tol ker el
+	 * @param p A megadott tavolsag vektor
+	 * @return A kert cella
 	 */
 	public Cell getCellFromHere(Position p) {
 		Logger.enterFunction("getCellFromHere(Position p)", this);		
@@ -87,7 +89,7 @@ public class Cell {
 		}
 	
 	/**
-	 * A cellarol eltavolit egy mozgo objektumot
+	 * A cellarol eltavolitja a megadott mozgo objektumot
 	 * @param ao Az eltavolitando mozgo objektum
 	 */
 	public void remove(ActiveObject ao) {
@@ -110,7 +112,7 @@ public class Cell {
 	}
 	
 	/**
-	 * Ket cella kozotti tavolsagot adja meg
+	 * Ket cella kozotti tavolsagot adja meg, a koordinatakulonbsegek osszegebol
 	 * @param c A masodik cella
 	 * @return A ket cella tavolsaga
 	 */
@@ -127,7 +129,8 @@ public class Cell {
 	}
 	
 	/**
-	 * Egy szabad szomszedos cellat ad vissza
+	 * Egy szabad szomszedos cellat ad vissza, amit a GameMap-tol ker el,
+	 * ha nincs ilyen nullaval ter vissza
 	 * @return A szabad szomszedos cella
 	 */
 	public Cell getFreeNeighbouringCell() {

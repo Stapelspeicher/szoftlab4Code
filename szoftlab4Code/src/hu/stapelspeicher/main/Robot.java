@@ -11,7 +11,7 @@ public class Robot implements ActiveObject {
 	private boolean oily;
 	private int stickyNum;
 	private int oilNum;
-	private double distance = 0;
+	private int distance = 0;
 
 	/**
 	 * A robot osztaly ketparameteres konstruktora
@@ -135,6 +135,7 @@ public class Robot implements ActiveObject {
 		if (newCell == null) {
 			this.die();
 		} else {
+			distance += currCell.getDistanceFromCell(newCell);
 			currCell.remove(this);
 			newCell.add(this);
 		}
@@ -149,6 +150,12 @@ public class Robot implements ActiveObject {
 		Logger.enterFunction("getCell()", this);
 		Logger.exitFunction();
 		return this.currCell;
+	}
+	
+	public int getDistance() {
+		Logger.enterFunction("getDistance", this);
+		Logger.exitFunction();
+		return distance;
 	}
 
 }
