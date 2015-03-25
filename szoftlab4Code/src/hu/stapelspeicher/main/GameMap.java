@@ -13,7 +13,7 @@ public class GameMap
 
 	/**
 	 * Beallit egy bizonyos mennyisegu korszamot a jatek elejen
-	 * @param rounds Adott szamu kor beallitasa a jatek kezdetere
+	 * @param rounds a korok kivant szama
 	 */
 	public void setRounds(int rounds){
 		Logger.enterFunction("setRounds(int rounds)", this);
@@ -22,7 +22,8 @@ public class GameMap
 	}
 	
 	/**
-	 * A GameMap ket parameteres konstruktora
+	 * A GameMap ket parameteres konstruktora, beallitja a 
+	 * a korok szamat egy elore definialt ertekre.
 	 * @param x A palya nagysaga vizszintesen
 	 * @param y A palya nagysaga fuggolegesen
 	 */
@@ -37,9 +38,10 @@ public class GameMap
 	}
 
 	/**
-	 * Egy cella lekerese
-	 * @param p Adott pozicioju cella
-	 * @return A kert cella
+	 * Visszaadja a palya egy cellajat, vagy null-t ha
+	 * az adott helyen nincs cella
+	 * @param p a kert cella pozicioja
+	 * @return a kert cella vagy null
 	 */
 	public Cell getCell(Position p)
 	{
@@ -49,8 +51,8 @@ public class GameMap
 	}
 
 	/**
-	 * Cella hozzaadasa
-	 * @param p A cella poziciojanak kijelolese
+	 * Cella hozzaadasa a palyahoz
+	 * @param p A cella kivant pozicioja
 	 */
 	public void addCell(Position p)
 	{
@@ -62,9 +64,10 @@ public class GameMap
 	}
 
 	/**
-	 * Az atadott pozicio korul visszaad egy ures celat, vagy nullt, ha nincs ilyen
-	 * @param p A cella pozicioja, aminek ures szomszedjait keressuk
-	 * @return Ures szomszedos cella
+	 * Az atadott pozicio korul visszaad egy ures celat, vagy nullt,
+	 * ha nincs ilyen.
+	 * @param p A cella pozicioja, aminek egy ures szomszedjat keressuk
+	 * @return egy ures szomszedos cella, vagy null ha nincs ilyen
 	 */
 	public Cell getFreeNeighbouringCell(Position p)
 	{

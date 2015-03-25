@@ -2,10 +2,24 @@ package hu.stapelspeicher.main;
 
 import java.util.Scanner;
 
+/**
+ * @author Barni
+ *
+ */
+/**
+ * @author Barni
+ *
+ */
 public class Test {
 
 	private static Scanner in;
 	
+	
+	/**
+	 * Ebben a fuggvenyben indul a program, ez irja ki a fomenut 
+	 * es hivja meg a teszteket vagy a kert almenut
+	 * @param args parancssori argumentumok, nem használja
+	 */
 	public static void main(String[] args) {
 		in = new Scanner(System.in);
 		int chosenIndex=0;
@@ -41,6 +55,11 @@ public class Test {
 		in.close();
 	}
 	
+	/**
+	 * Ket robot utkozeset szimulalja. Megkerdezi a felhasznalot,
+	 * hogy legyen-e eleg hely az ugrashoz a szomszedos cellakban
+	 * es eszerint epiti fel a palyat 
+	 */
 	private static void collision(){
 		System.out.print("Van eleg hely a szomszed cellakban? (I/N) ");
 		char c = in.next().charAt(0);
@@ -77,6 +96,10 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * A hatos menupont menujet, azaz a robotleptetes menujet
+	 * irja ki es hivja meg a kivant tesztelo fuggvenyt.
+	 */
 	private static void step(){
 		int chosenIndex=0;
 		
@@ -107,6 +130,10 @@ public class Test {
 		}
 	}
 
+	/**
+	 * Azt az esetet szimulalja, amikor egy robot egy ures cellara
+	 * lep, azaz leugrik a palyarol. 
+	 */
 	private static void stepsOnEmptyCell(){
 		Logger.enterFunction("stepsOnEmptyCell()", Test.class);
 		
@@ -123,6 +150,10 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * Azt szimulalja, amikor egy robot egy olajfoltos
+	 * cellara lep es utkozes nem tortenik. 
+	 */
 	private static void stepsOnOilyCell(){
 		Logger.enterFunction("stepsOnOilyCell()", Test.class);
 		
@@ -144,6 +175,10 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * Azt szimulalja, amikor egy robot egy ragacsfoltos
+	 * cellara lep es utkozes nem tortenik.
+	 */
 	private static void stepsOnStickyCell(){
 		Logger.enterFunction("stepsOnStickyCell()", Test.class);
 		
@@ -165,6 +200,10 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * Azt az esetet szimulalja, amikor egy robot egy folt
+	 * nelkuli cellara lep es utkozes nem tortenik. 
+	 */
 	private static void stepsOnPlainCell(){
 		Logger.enterFunction("stepsOnPlainCell()", Test.class);
 		
@@ -182,6 +221,11 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * A kovetkezo kor usecase-t teszteli abban az esetben
+	 * amikor van meg hatha kor, illetve akkor is amikor mar
+	 * nincs. (A felhasznalo valaszatol fugg)
+	 */
 	private static void nextRound(){
 		Logger.enterFunction("nextRound()", Test.class);
 		System.out.print("Ez volt az utolso kor? (I/N) ");
@@ -204,6 +248,11 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * Azt szimulalja, amikor egy robot megprobal letenni egy
+	 * cellara egy ragacsfoltot. A felhasznalo dontese alapjan 
+	 * ekkor vagy rendelkezik a robot ragaccsal vagy nem.
+	 */
 	private static void placeSticky(){	
 		System.out.print("Van ragacsfoltja a robotnak? (I/N) ");
 		char c = in.next().charAt(0);
@@ -235,6 +284,11 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * Azt szimulalja, amikor egy robot megprobal letenni egy
+	 * cellara egy olajfoltot. A felhasznalo dontese alapjan 
+	 * ekkor vagy rendelkezik a robot ragaccsal vagy nem.
+	 */
 	private static void placeOily(){	
 		System.out.print("Van olajfoltja a robotnak? (I/N) ");
 		char c = in.next().charAt(0);
@@ -266,6 +320,10 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * Azt szimulalja, amikor a egy robot sebesseget
+	 * valtoztatjak.
+	 */
 	private static void changeRobotSpeed(){
 		Logger.enterFunction("changeRobotSpeed()", Test.class);
 		
@@ -275,6 +333,13 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	
+	/**
+	 * Beolvassa a felhasznalo altal beírt menupontot
+	 * es megvizsgalja hogy valos-e.
+	 * @param bound a legnagyobb valasztheto menupont sorszama
+	 * @return a valasztott menupont sorszama
+	 */
 	private static int getIndex(int bound){
 		int chosenIndex=0;
 		System.out.print("A valasztott menupont: ");
@@ -295,6 +360,10 @@ public class Test {
 		return chosenIndex;
 	}
 	
+	/**
+	 * A jatekinditas menupont almenujenek kiirasa es
+	 * a valasztott menuponthoz tartozo fuggveny hivasa.
+	 */
 	private static void launchGame(){
 		int chosenIndex=0;
 		
@@ -319,6 +388,10 @@ public class Test {
 		
 	}
 	
+	/**
+	 * Letrehoz egy robotot a felhasznalo altal megadott
+	 * olaj es regecskeszlettel, es elhelyezi egy palyara.
+	 */
 	private static void createRobot(){		
 		System.out.println("Ragacs es olaj szama szokozzel elvalasztva:");
 		int sticky = in.nextInt();
@@ -335,6 +408,10 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * Letrehoz egy cellat a felhasznalo altal megadott koordinatakra.
+	 * Mindegyik koordinata legalabb 0 es legfeljebb 9.
+	 */
 	private static void createCell(){		
 		System.out.println("Cella koordinatai szokozzel elvalasztva:");
 		int x = in.nextInt();
@@ -348,6 +425,11 @@ public class Test {
 		Logger.exitFunction();
 	}
 	
+	/**
+	 * A fomenut kiiro fuggveny. Ez is keri be a menupont
+	 * sorszamat es adja vissza az ot hivo fuggvenynek. (main)
+	 * @return a valaszttott menupont
+	 */
 	private static int printIndex(){
 		System.out.println("1. Jatekinditas");
 		System.out.println("2. Robot sebessegenek modositasa");
