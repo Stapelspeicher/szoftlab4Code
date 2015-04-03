@@ -40,7 +40,7 @@ public class Position {
 	}
 	
 	/**
-	 * @param p a Position amivel elosztjuk az amire meghívtuk a függvényt
+	 * @param p a Position amivel elosztjuk azt, amire meghívtuk a függvényt
 	 * 		 mivel a Position immutable, ezert uj objektumot ad vissza
 	 * @return az uj Position objektum
 	 */
@@ -51,7 +51,7 @@ public class Position {
 	}
 	
 	/**
-	 * @param p a Position amihez hozzáadjuk azt amire meghívtuk a függvényt
+	 * @param p a Position amihez hozzáadjuk azt, amire meghívtuk a függvényt
 	 * 		 mivel a Position immutable, ezert uj objektumot ad vissza
 	 * @return az uj Position objektum
 	 */
