@@ -26,6 +26,12 @@ public interface ActiveObject {
 	 */
 	void collideWithRobot(Robot other);
 	
+	/**
+	 * Ez a fuggveny azt kezeli le, amikor egy ActiveObject utkozik egy kisrobottal
+	 * @param other - az a kisrobot, amivel az activeObject utkozik
+	 */
+	void collideWithLittleRobot(LittleRobot other);
+	
 	
 	/**
 	 * az objektum "meghal", azaz leesik a palyarol, vagy olyan modon utkozik egy/tobb masik robottal, hogy mind meghalnak

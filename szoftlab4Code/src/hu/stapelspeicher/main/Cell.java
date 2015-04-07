@@ -15,6 +15,32 @@ public class Cell {
 	private Position pos;
 	private GameMap map;
 	
+	/**
+	 * A cellan talalhato aktorokat adja vissza.
+	 * ----CSAK A TESZTELESHEZ HASZNALT!----
+	 * @return a kert aktorok listaja
+	 */	
+	public List<ActiveObject> getAOsForTest(){
+		return actors;
+	}
+	
+	/**
+	 * A cellan talalhato csapdat adja vissza.
+	 * ----CSAK A TESZTELESHEZ HASZNALT!----
+	 * @return a kert csapda
+	 */
+	public Trap getTrapForTest(){
+		return trap;
+	}
+	
+	/**
+	 * A cella poziciojat adja vissza.
+	 * ----CSAK A TESZTELESHEZ HASZNALT!----
+	 * @return a kert pozicio
+	 */
+	public Position getPositionForTest(){
+		return pos;
+	}
 	
 	/**
 	 * A cella poziciojat allitja be
@@ -51,8 +77,11 @@ public class Cell {
 		Logger.enterFunction("add(ActiveObject ao)", this);
 		
 		actors.add(ao);
-		if(trap!=null)
+		if(trap!=null){
 			trap.stepOn(ao);
+			if(trap.abrade())
+				trap=null;
+		}	
 		for(ActiveObject actor : actors) {
 			if(actor != ao) {
 				actor.stepOn(ao);
@@ -137,6 +166,55 @@ public class Cell {
 		Logger.enterFunction("getFreeNeighbouringCell()", this);
 		Logger.exitFunction();
 		return map.getFreeNeighbouringCell(pos);
+	}
+
+	public void dry() {
+		if(trap!=null){
+			if(trap.dry())
+				trap=null;
+		}
+	}
+
+	public Position getNearestTrapRelativePosition() {
+		if(trap!=null) return new Position(0,0);
+		boolean limitNotReached = true;
+		int distance = 1;
+		Cell c = null;
+		while(limitNotReached){
+			limitNotReached=false;
+			for(int i=0; i<distance; i++){
+				c = getCellFromHere(new Position(i, distance-i));
+				if(c!=null){
+					limitNotReached=true;
+					if(c.trap!=null)
+						return c.pos;
+				}
+				c = getCellFromHere(new Position(-i, distance-i));
+				if(c!=null){
+					limitNotReached=true;
+					if(c.trap!=null)
+						return c.pos;
+				}
+				c = getCellFromHere(new Position(i, i-distance));
+				if(c!=null){
+					limitNotReached=true;
+					if(c.trap!=null)
+						return c.pos;
+				}
+				c = getCellFromHere(new Position(-i, i-distance));
+				if(c!=null){
+					limitNotReached=true;
+					if(c.trap!=null)
+						return c.pos;
+				}
+			}
+			distance++;
+		}
+		return null;
+	}
+
+	public void removeTrap() {
+		trap=null;
 	}
 	
 }

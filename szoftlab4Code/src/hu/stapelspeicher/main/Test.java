@@ -20,40 +20,40 @@ public class Test {
 	 * es hivja meg a teszteket vagy a kert almenut
 	 * @param args parancssori argumentumok, nem használja
 	 */
-	public static void main(String[] args) {
-		in = new Scanner(System.in);
-		int chosenIndex=0;
-		
-		while(chosenIndex!=8){
-			chosenIndex = printIndex();
-			switch (chosenIndex) {
-			case 1:
-				launchGame();
-				break;
-			case 2:
-				changeRobotSpeed();
-				break;
-			case 3:
-				placeOily();
-				break;
-			case 4:
-				placeSticky();
-				break;
-			case 5:
-				nextRound();
-				break;
-			case 6:
-				step();
-				break;
-			case 7:
-				collision();
-			default:
-				break;
-			}
-		}
-
-		in.close();
-	}
+//	public static void main(String[] args) {
+//		in = new Scanner(System.in);
+//		int chosenIndex=0;
+//		
+//		while(chosenIndex!=8){
+//			chosenIndex = printIndex();
+//			switch (chosenIndex) {
+//			case 1:
+//				launchGame();
+//				break;
+//			case 2:
+//				changeRobotSpeed();
+//				break;
+//			case 3:
+//				placeOily();
+//				break;
+//			case 4:
+//				placeSticky();
+//				break;
+//			case 5:
+//				nextRound();
+//				break;
+//			case 6:
+//				step();
+//				break;
+//			case 7:
+//				collision();
+//			default:
+//				break;
+//			}
+//		}
+//
+//		in.close();
+//	}
 	
 	/**
 	 * Ket robot utkozeset szimulalja. Megkerdezi a felhasznalot,

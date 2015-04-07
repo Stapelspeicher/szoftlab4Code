@@ -8,6 +8,17 @@ package hu.stapelspeicher.main;
 public class Sticky implements Trap
 {
 
+	private int abrasion = 4;
+	
+	/**
+	 * A ragacsfolt kopottsagat adja vissza.
+	 * ----CSAK A TESZTELESHEZ HASZNALT!----
+	 * @return a kert kopottsag
+	 */
+	public int getAbrasionForTest(){
+		return abrasion;
+	}
+	
 	/* (non-Javadoc)
 	 * @see hu.stapelspeicher.main.Trap#stepOn(hu.stapelspeicher.main.ActiveObject)
 	 */
@@ -18,6 +29,17 @@ public class Sticky implements Trap
 		Logger.enterFunction("stepOn(ActiveObject ao)", this);
 		ao.stickyEffect();
 		Logger.exitFunction();
+	}
+
+	@Override
+	public boolean dry() {
+		return false;
+	}
+
+	@Override
+	public boolean abrade() {
+		abrasion--;
+		return (abrasion==0);
 	}
 
 }

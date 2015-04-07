@@ -70,4 +70,22 @@ public class Position {
 		Logger.exitFunction();
 		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 	}
+	
+	/**
+	 * ket position objektumot hasonlit ossze a vektor hossza alapjan.
+	 * ha az aktuális objektum hosszabb mint a parameterkent kapott,
+	 * akkor 1 a visszateresei ertek, ha egyenloek akkor 0,
+	 * kulonben -1
+	 * @param other a masik position objektum
+	 * @return 1, ha az aktualis objektum hosszabb, 0 ha egyenloek, kulonben -1
+	 */
+	public int compareTo(Position other){
+		int this_len = x*x+y*y;
+		int other_len = other.x*other.x+other.y*other.y;
+		if(this_len==other_len)
+			return 0;
+		if(this_len>other_len)
+			return 1;
+		return -1;
+	}
 }

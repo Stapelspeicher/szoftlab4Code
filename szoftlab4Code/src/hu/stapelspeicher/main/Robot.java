@@ -13,6 +13,34 @@ public class Robot implements ActiveObject {
 	private int oilNum;
 	private int distance = 0;
 
+	
+	/**
+	 * A robot sebesseget adja vissza.
+	 * ----CSAK A TESZTELESHEZ HASZNALT!----
+	 * @return a kert sebesseg
+	 */	
+	public Position getVelocityForTest(){
+		return velocity;
+	}
+	
+	/**
+	 * A robot ragacskeszletet adja vissza.
+	 * ----CSAK A TESZTELESHEZ HASZNALT!----
+	 * @return a kert ragacskeszlet
+	 */	
+	public int getStickyForTest(){
+		return stickyNum;
+	}
+	
+	/**
+	 * A robot olajkeszletet adja vissza.
+	 * ----CSAK A TESZTELESHEZ HASZNALT!----
+	 * @return a kert olajkeszlet
+	 */	
+	public int getOilyForTest(){
+		return oilNum;
+	}
+	
 	/**
 	 * A robot osztaly ketparameteres konstruktora
 	 * @param stickyNum - a robot hany ragaccsal indul
@@ -31,8 +59,11 @@ public class Robot implements ActiveObject {
 	 */
 	public void placeSticky() {
 		Logger.enterFunction("placeSticky()", this);
-		if (stickyNum > 0)
+		if (stickyNum > 0){
 			currCell.add(new Sticky());
+			stickyNum--;
+		}
+			
 		Logger.exitFunction();
 	}
 
@@ -41,8 +72,11 @@ public class Robot implements ActiveObject {
 	 */
 	public void placeOily() {
 		Logger.enterFunction("placeOily()", this);
-		if (oilNum > 0)
+		if (oilNum > 0){
 			currCell.add(new Oily());
+			oilNum--;
+		}
+			
 		Logger.exitFunction();
 	}
 
@@ -94,17 +128,22 @@ public class Robot implements ActiveObject {
 	@Override
 	public void collideWithRobot(Robot other) {
 		Logger.enterFunction("collideWithRobot(Robot other)", this);
-		Cell freeCell = currCell.getFreeNeighbouringCell();
-		if (freeCell == null) {
+		if(velocity.compareTo(other.velocity)>0){
 			other.die();
-			this.die();
-		} else {
-			currCell.remove(this);
-			freeCell.add(this);
+			velocity=velocity.add(other.velocity).divide(new Position(2, 2));
+		}
+		else if(velocity.compareTo(other.velocity)<0){
+			other.velocity=other.velocity.add(velocity).divide(new Position(2, 2));
+			die();
+		}
+		else{
+			other.die();
+			die();
 		}
 		Logger.exitFunction();
 	}
-
+	
+	
 	/* (non-Javadoc)
 	 * @see hu.stapelspeicher.main.ActiveObject#die()
 	 */
@@ -138,6 +177,7 @@ public class Robot implements ActiveObject {
 			distance += currCell.getDistanceFromCell(newCell);
 			currCell.remove(this);
 			newCell.add(this);
+			currCell=newCell;
 		}
 		Logger.exitFunction();
 	}
@@ -156,6 +196,12 @@ public class Robot implements ActiveObject {
 		Logger.enterFunction("getDistance", this);
 		Logger.exitFunction();
 		return distance;
+	}
+
+	@Override
+	public void collideWithLittleRobot(LittleRobot other) {
+		other.die();
+		currCell.add(new Oily());
 	}
 
 }

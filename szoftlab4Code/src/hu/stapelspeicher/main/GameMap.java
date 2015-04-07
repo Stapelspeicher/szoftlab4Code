@@ -47,6 +47,8 @@ public class GameMap
 	{
 		Logger.enterFunction("getCell(Position p)", this);
 		Logger.exitFunction();
+		if(p.getX()<0 || p.getX() >= xlength || p.getY()<0 || p.getY() >= ylength)
+			return null;
 		return cells[p.getX()][p.getY()];
 	}
 
@@ -59,6 +61,7 @@ public class GameMap
 		Logger.enterFunction("addCell(Position p)", this);
 		Cell c = new Cell();
 		c.setPosition(p);
+		c.setMap(this);
 		cells[p.getX()][p.getY()] = c;
 		Logger.exitFunction();
 	}
@@ -143,9 +146,15 @@ public class GameMap
 	public boolean decrementRounds()
 	{
 		rounds--;
-		if(rounds>0)
-			return true;
-		else
+		if(rounds==0)
 			return false;
+		for(int i=0; i<xlength ; i++){
+			for(int j=0; j<ylength; j++){
+				if(cells[i][j]!=null){
+					cells[i][j].dry();
+				}
+			}
+		}
+		return true;
 	}
 }
