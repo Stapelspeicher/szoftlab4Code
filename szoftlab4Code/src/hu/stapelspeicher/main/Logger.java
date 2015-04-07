@@ -12,7 +12,7 @@ public class Logger {
 			System.out.print(" ");
 	}
 	public static void enterFunction(String s, Object o) {
-		addSpaces();
+//		addSpaces();
 		depth += 1;
 		String name = objectNames.get(o.toString());
 		
@@ -24,9 +24,9 @@ public class Logger {
 			else { // ha van specko neve
 				name = " name: " + name + "Object id: " + short_id;
 			}
-			System.out.println(o.getClass().getSimpleName() + "." + s + name);
+//			System.out.println(o.getClass().getSimpleName() + "." + s + name);
 		} else { // ha osztalymetodus
-			System.out.println(short_id + "." + s);
+//			System.out.println(short_id + "." + s);
 		}
 	}
 	

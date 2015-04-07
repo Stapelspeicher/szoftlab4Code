@@ -38,10 +38,13 @@ public class LittleRobot implements ActiveObject {
 	
 	private void startCleaningIfNeeded(){
 		Position p = currCell.getNearestTrapRelativePosition();
-		if(p.getX()==0 && p.getY()==0){
-			cleaningCounter=2;
-			state = LittleRobotState.CLEANING;
+		if(p!=null){
+			if(p.getX()==0 && p.getY()==0){
+				cleaningCounter=2;
+				state = LittleRobotState.CLEANING;
+			}
 		}
+
 	}
 	
 	public void setState(LittleRobotState newState){
@@ -70,8 +73,8 @@ public class LittleRobot implements ActiveObject {
 		Cell freeCell = currCell.getFreeNeighbouringCell();
 		if(freeCell != null){
 			currCell.remove(this);
-			freeCell.add(this);
 			currCell=freeCell;
+			freeCell.add(this);
 		}
 		else die();
 	}
@@ -84,12 +87,16 @@ public class LittleRobot implements ActiveObject {
 	@Override
 	public void setCell(Cell c) {
 		currCell = c;
-		if(c.getNearestTrapRelativePosition().getX()==0 &&
-		   c.getNearestTrapRelativePosition().getY()==0){
-			state = LittleRobotState.CLEANING;
-			cleaningCounter = 2;
+		Position p = c.getNearestTrapRelativePosition();
+		if(p==null){
+			state = LittleRobotState.NORMAL;
 		}
-			
+		else{
+			if(p.getX()==0 && p.getY()==0){
+				state = LittleRobotState.CLEANING;
+				cleaningCounter = 2;
+			}
+		}	
 	}
 
 	@Override
@@ -99,8 +106,8 @@ public class LittleRobot implements ActiveObject {
 		case DAZED:
 			c = currCell.getFreeNeighbouringCell();
 			currCell.remove(this);
-			c.add(this);
 			currCell = c;
+			c.add(this);
 			dazedCounter--;
 			if(dazedCounter==0)
 				state = LittleRobotState.NORMAL;
@@ -108,14 +115,16 @@ public class LittleRobot implements ActiveObject {
 			break;
 		case NORMAL:
 			Position p = currCell.getNearestTrapRelativePosition();
-			if(Math.abs(p.getX())>Math.abs(p.getY()))
+			if(p!=null){
+				if(Math.abs(p.getX())>Math.abs(p.getY()))
 				c = currCell.getCellFromHere(new Position(p.getX()/Math.abs(p.getX()),0));
 			else
 				c = currCell.getCellFromHere(new Position(0,p.getY()/Math.abs(p.getY())));
 			currCell.remove(this);
-			c.add(this);
 			currCell=c;
+			c.add(this);
 			startCleaningIfNeeded();
+			}
 			break;
 		case CLEANING:
 			cleaningCounter--;
@@ -140,8 +149,8 @@ public class LittleRobot implements ActiveObject {
 		Cell freeCell = currCell.getFreeNeighbouringCell();
 		if(freeCell!=null){
 			currCell.remove(this);
-			freeCell.add(this);
 			currCell=freeCell;
+			freeCell.add(this);
 		}
 		else die();
 	}

@@ -7,7 +7,7 @@ package hu.stapelspeicher.main;
  */
 public class Oily implements Trap
 {
-	private int wetness = 3;
+	private int wetness = 4;
 	
 	/**
 	 * Az olajfolt nedvesseget adja vissza.

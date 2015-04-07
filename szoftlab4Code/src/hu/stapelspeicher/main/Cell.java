@@ -182,30 +182,30 @@ public class Cell {
 		Cell c = null;
 		while(limitNotReached){
 			limitNotReached=false;
-			for(int i=0; i<distance; i++){
+			for(int i=0; i<=distance; i++){
 				c = getCellFromHere(new Position(i, distance-i));
 				if(c!=null){
 					limitNotReached=true;
 					if(c.trap!=null)
-						return c.pos;
+						return c.pos.subtract(pos);
 				}
 				c = getCellFromHere(new Position(-i, distance-i));
 				if(c!=null){
 					limitNotReached=true;
 					if(c.trap!=null)
-						return c.pos;
+						return c.pos.subtract(pos);
 				}
 				c = getCellFromHere(new Position(i, i-distance));
 				if(c!=null){
 					limitNotReached=true;
 					if(c.trap!=null)
-						return c.pos;
+						return c.pos.subtract(pos);
 				}
 				c = getCellFromHere(new Position(-i, i-distance));
 				if(c!=null){
 					limitNotReached=true;
 					if(c.trap!=null)
-						return c.pos;
+						return c.pos.subtract(pos);
 				}
 			}
 			distance++;

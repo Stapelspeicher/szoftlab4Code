@@ -62,6 +62,17 @@ public class Position {
 	}
 	
 	/**
+	 * @param p a Position amihez hozzáadjuk azt, amire meghívtuk a függvényt
+	 * 		 mivel a Position immutable, ezert uj objektumot ad vissza
+	 * @return az uj Position objektum
+	 */
+	public Position subtract(Position p) {
+		Logger.enterFunction("add(Position p)", this);
+		Logger.exitFunction();
+		return new Position(x - p.x,y - p.y);
+	}
+	
+	/**
 	 * @param p a másik pont, amihez kepest a tavolsagot ellenorizni akarjuk
 	 * @return a ket pont kozotti tavolsag
 	 */

@@ -176,8 +176,8 @@ public class Robot implements ActiveObject {
 		} else {
 			distance += currCell.getDistanceFromCell(newCell);
 			currCell.remove(this);
-			newCell.add(this);
 			currCell=newCell;
+			newCell.add(this);
 		}
 		Logger.exitFunction();
 	}

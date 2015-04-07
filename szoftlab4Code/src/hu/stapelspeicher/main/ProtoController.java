@@ -203,6 +203,7 @@ public class ProtoController {
 		command[0] = "START";
 		while (sc.hasNext() && !("ENDGAME".equals(command[0]))) {
 			command = sc.nextLine().split(" ");
+			System.out.println(command[0]);
 			if(command[0].equals("MAP"))
 				setMap(command);
 			else if(command[0].equals("ADDROBOT"))
