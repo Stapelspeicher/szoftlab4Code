@@ -248,7 +248,13 @@ public class ProtoController {
 	
 	private static void checkResults(File testDir, File resultDir, File expectedDir) throws FileNotFoundException{
 		PrintWriter results = new PrintWriter(new File(resultDir, "results.html"));
-		Scanner resultTemplate = new Scanner(new File("test/test.html"));
+		Scanner resultTemplate = null;
+		try{
+			resultTemplate = new Scanner(new File("../test/test.html"));
+		}
+		catch(Exception e){
+			resultTemplate = new Scanner(new File("test/test.html"));
+		}
 		String line = resultTemplate.nextLine();
 		while(!line.equals("<!--RESULTS-->")){
 			results.println(line);
