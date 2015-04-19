@@ -1,9 +1,9 @@
 package hu.stapelspeicher.main;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,6 @@ import java.util.Set;
 
 public class ProtoController {
 	
-	private static boolean dbg=false;
 	private static Map<String, ActiveObject> AOList = new HashMap<String, ActiveObject>();
 	private static GameMap map = null;
 	private static Scanner sc = null;
@@ -193,7 +192,7 @@ public class ProtoController {
 	}
 	
 	
-	public static void main(String args[]) throws IOException{
+	private static void single(String args[]) throws IOException{
 		if(args.length<3){
 			throw new IOException("Illegal number of parameters!");
 		}
@@ -203,7 +202,6 @@ public class ProtoController {
 		command[0] = "START";
 		while (sc.hasNext() && !("ENDGAME".equals(command[0]))) {
 			command = sc.nextLine().split(" ");
-			System.out.println(command[0]);
 			if(command[0].equals("MAP"))
 				setMap(command);
 			else if(command[0].equals("ADDROBOT"))
@@ -227,5 +225,101 @@ public class ProtoController {
 		}
 		out.close();
 		sc.close();
+	}
+	
+	private static boolean resultMatches(File result, File expected) throws FileNotFoundException{
+		Scanner resultScanner = new Scanner(result);
+		Scanner expectedScanner = new Scanner(expected);
+		String resultLine;
+		String expectedLine;
+		while(resultScanner.hasNext()){
+			resultLine = resultScanner.nextLine();
+			expectedLine = expectedScanner.nextLine();
+			if(!resultLine.equals(expectedLine)){
+				resultScanner.close();
+				expectedScanner.close();
+				return false;
+			}
+		}
+		resultScanner.close();
+		expectedScanner.close();
+		return true;
+	}
+	
+	private static void checkResults(File testDir, File resultDir, File expectedDir) throws FileNotFoundException{
+		PrintWriter results = new PrintWriter(new File(resultDir, "results.html"));
+		Scanner resultTemplate = new Scanner(new File("test/test.html"));
+		String line = resultTemplate.nextLine();
+		while(!line.equals("<!--RESULTS-->")){
+			results.println(line);
+			line=resultTemplate.nextLine();
+		}
+		
+		File[] testCases = testDir.listFiles();
+		for(File f : testCases){
+			File resultFile = new File(resultDir, f.getName().replace(".txt", ".result.txt"));
+			File expectedFile = new File(expectedDir, f.getName().replace(".txt", ".result.txt"));
+			results.println("<tr bgcolor=\"" +
+						    (resultMatches(resultFile, expectedFile) ? "#CCFFCC" : "#FF9C9C") +
+						    "\">");
+			results.println("<td><a href=\"" +
+						    f.getAbsolutePath() +
+						    "\">" +
+						    f.getName() +
+						    "</a></td>");
+			results.println("<td><a href=\"" +
+						    resultFile.getAbsolutePath() +
+						    "\">" +
+						    resultFile.getName() +
+						    "</a></td>");
+			results.println("<td><a href=\"" +
+						    expectedFile.getAbsolutePath() +
+						    "\">" +
+						    expectedFile.getName() +
+						    "</a></td>");
+			results.println("</tr>");
+		}
+		
+		while(resultTemplate.hasNext()){
+			line=resultTemplate.nextLine();
+			results.println(line);
+		}
+		
+		results.close();
+		resultTemplate.close();
+	}
+	
+	private static void multiple(String[] args) throws IOException{
+		if(args.length<3){
+			throw new IOException("Illegal number of parameters!");
+		}
+		File testDir = new File(args[1]);
+		File resultDir = new File(args[2]);
+		File expectedDir = null;
+		if(args.length==4)
+			expectedDir = new File(args[3]);
+		if(!testDir.isDirectory() || !resultDir.isDirectory())
+			throw new IOException("The test or result path is not a directory!");
+		
+		File[] testCases = testDir.listFiles();
+		for(File f : testCases){
+			String[] singleParams = new String[3];
+			singleParams[0] = "single";
+			singleParams[1] = f.getCanonicalPath();
+			singleParams[2] = (new File(resultDir, f.getName().replace(".txt", ".result.txt"))).getCanonicalPath();
+			single(singleParams);
+		}
+		
+		if(expectedDir!=null)
+			checkResults(testDir, resultDir, expectedDir);
+	}
+	
+	public static void main(String args[]) throws IOException{
+		if(args[0].equals("single"))
+			single(args);
+		else if(args[0].equals("multiple"))
+			multiple(args);
+		else
+			System.out.println("Illegal first parameter. Terminating.");
 	}
 }
