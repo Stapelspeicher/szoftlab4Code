@@ -241,6 +241,8 @@ public class ProtoController {
 				return false;
 			}
 		}
+		if(expectedScanner.hasNext())
+			return false;
 		resultScanner.close();
 		expectedScanner.close();
 		return true;
