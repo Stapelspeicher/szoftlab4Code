@@ -58,7 +58,7 @@ public class Position {
 	public Position add(Position p) {
 		Logger.enterFunction("add(Position p)", this);
 		Logger.exitFunction();
-		return new Position(x + p.x,y + p.y);
+		return new Position(x + p.x, y + p.y);
 	}
 	
 	/**

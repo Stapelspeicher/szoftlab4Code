@@ -322,12 +322,12 @@ public class ProtoController {
 			checkResults(testDir, resultDir, expectedDir);
 	}
 	
-	public static void main(String args[]) throws IOException{
+/*	public static void main(String args[]) throws IOException{
 		if(args[0].equals("single"))
 			single(args);
 		else if(args[0].equals("multiple"))
 			multiple(args);
 		else
 			System.out.println("Illegal first parameter. Terminating.");
-	}
+	}*/
 }

@@ -12,7 +12,11 @@ public class Robot implements ActiveObject {
 	private int stickyNum;
 	private int oilNum;
 	private int distance = 0;
+	private boolean alive;
 
+	public boolean isAlive(){
+		return alive;
+	}
 	
 	/**
 	 * A robot sebesseget adja vissza.
@@ -51,6 +55,7 @@ public class Robot implements ActiveObject {
 		this.stickyNum = stickyNum;
 		this.oilNum = oilyNum;
 		velocity = new Position(0, 0);
+		alive = true;
 		Logger.exitFunction();
 	}
 
@@ -151,6 +156,7 @@ public class Robot implements ActiveObject {
 	public void die() {
 		Logger.enterFunction("die()", this);
 		currCell.remove(this);
+		alive = false;
 		Logger.exitFunction();
 	}	
 

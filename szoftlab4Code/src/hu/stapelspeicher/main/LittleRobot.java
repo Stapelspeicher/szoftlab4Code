@@ -7,6 +7,11 @@ public class LittleRobot implements ActiveObject {
 	private int dazedCounter=0;
 	private int cleaningCounter=0;
 	private Cell currCell=null;
+	private boolean alive=true;
+	
+	public boolean isAlive(){
+		return alive;
+	}
 	
 	/**
 	 * A kisrobot ....
@@ -82,6 +87,7 @@ public class LittleRobot implements ActiveObject {
 	@Override
 	public void die() {
 		currCell.remove(this);
+		alive = false;
 	}
 
 	@Override

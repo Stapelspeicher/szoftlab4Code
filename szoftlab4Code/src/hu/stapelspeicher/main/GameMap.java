@@ -10,7 +10,19 @@ public class GameMap
 	
 	private int xlength;
 	private int ylength;
+	
+	public int getRounds(){
+		return rounds;
+	}
 
+	public int getWidth(){
+		return xlength;
+	}
+	
+	public int getHeight(){
+		return ylength;
+	}
+	
 	/**
 	 * Beallit egy bizonyos mennyisegu korszamot a jatek elejen
 	 * @param rounds a korok kivant szama
