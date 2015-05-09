@@ -20,12 +20,12 @@ public class GameStartPanel extends JPanel implements MouseListener{
 	private int players;
 	private GameController gc;
 	private static final Color selectorButtonColors[]={
-		new Color(21, 152, 42),
-		new Color(228, 107, 25),
-		new Color(184, 27, 27),
+		new Color(27, 88, 184),
 		new Color(184, 27, 108),
 		new Color(105, 26, 184),
-		new Color(27, 88, 184)
+		new Color(184, 27, 27),
+		new Color(21, 152, 42),
+		new Color(228, 107, 25)
 	};
 	
 	public GameStartPanel(GameController gc){

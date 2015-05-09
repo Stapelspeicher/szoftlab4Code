@@ -8,13 +8,14 @@ public class GameMapView{
 	public static final int BORDER_WIDTH = 29;
 	public static final int CELL_SIZE = 32;
 	public static final int CELL_GAP = 2;
+	public static final Color CELL_COLOR = new Color(69, 69, 69);
 	
 	public GameMapView(GameMap g){
 		game = g;
 	}
 	
 	public void paintMap(Graphics g){
-		g.setColor(new Color(69, 69, 69));
+		g.setColor(CELL_COLOR);
 		for(int i=0; i<game.getHeight(); i++){
 			for(int j=0; j<game.getWidth(); j++){
 				g.fillRect(BORDER_WIDTH+j*(CELL_GAP+CELL_SIZE),

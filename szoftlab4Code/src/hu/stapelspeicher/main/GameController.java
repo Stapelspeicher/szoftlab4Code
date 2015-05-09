@@ -3,6 +3,8 @@ package hu.stapelspeicher.main;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JPanel;
+
 public class GameController{
 	private Window mainWindow;
 	private GameMap game;
@@ -20,11 +22,8 @@ public class GameController{
 	private static final int STICKY = 5;
 	
 	public void selectPlayers(){
-		mainWindow = new Window();
 		gameStartPanel = new GameStartPanel(this);
 		mainWindow.setLeftPanel(gameStartPanel);
-		resultPanel = new ResultPanel(null);
-		mainWindow.setResultPanel(resultPanel);
 	}
 	
 	public void startGame(int players){
@@ -56,6 +55,7 @@ public class GameController{
 		mainWindow.setResultPanel(resultPanel);
 		ControllerPanel controllerPanel = new ControllerPanel(this);
 		mainWindow.setControllerPanel(controllerPanel);
+		resultPanel.setActive(currentRobot);
 	}
 	
 	private void endGame(){
@@ -108,15 +108,23 @@ public class GameController{
 			if(currentRobot==0){
 				nextRound();
 			}
+			resultPanel.setActive(currentRobot);
 			mainWindow.repaint();
 		}
 		
 	}
 	
+	public void startGame(){
+		mainWindow = new Window();
+		JPanel blankPanel = new JPanel();
+		blankPanel.setBackground(GamePanel.BACKGROUND_COLOR);
+		mainWindow.setResultPanel(blankPanel);
+		selectPlayers();
+	}
+	
 	public static void main(String args[]){
 		GameController gc = new GameController();
-		
-		gc.selectPlayers();
+		gc.startGame();
 		
 	}
 }

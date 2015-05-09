@@ -1,17 +1,19 @@
 package hu.stapelspeicher.main;
 
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class ControllerPanel extends JPanel implements MouseListener{	
 	private GameController gc;
@@ -25,14 +27,16 @@ public class ControllerPanel extends JPanel implements MouseListener{
 	
 	public ControllerPanel(GameController gc){
 		this.gc = gc;
-		setBackground(new Color(255,29,29));
-		setPreferredSize(new Dimension(200, 300));
+		setBackground(GameMapView.CELL_COLOR);
+		setPreferredSize(new Dimension(200, 180));
+		
 		GridBagLayout grid = new GridBagLayout();
 		GridBagConstraints constraints = new GridBagConstraints();
 		setLayout(grid);
-	
 		
-		upArrow = new JLabel("\u2191");
+		constraints.weightx = 0.2;
+		
+		upArrow = new JLabel("\u2191", SwingConstants.CENTER);
 		upArrow.setFont(new Font("Arial", 0, 30));
 		upArrow.setBackground(new Color(29, 255, 29));
 		upArrow.setForeground(Color.WHITE);
@@ -41,7 +45,7 @@ public class ControllerPanel extends JPanel implements MouseListener{
 		constraints.gridy = 0;
 		add(upArrow, constraints);
 		
-		downArrow = new JLabel("\u2193");
+		downArrow = new JLabel("\u2193", SwingConstants.CENTER);
 		downArrow.setFont(new Font("Arial", 0, 30));
 		downArrow.setBackground(new Color(29, 255, 29));
 		downArrow.setForeground(Color.WHITE);
@@ -50,7 +54,9 @@ public class ControllerPanel extends JPanel implements MouseListener{
 		constraints.gridy = 2;
 		add(downArrow, constraints);
 		
-		leftArrow = new JLabel("\u2190");
+		constraints.weightx = 0.4;
+		
+		leftArrow = new JLabel("\u2190", SwingConstants.RIGHT);
 		leftArrow.setFont(new Font("Arial", 0, 30));
 		leftArrow.setBackground(new Color(29, 255, 29));
 		leftArrow.setForeground(Color.WHITE);
@@ -59,7 +65,7 @@ public class ControllerPanel extends JPanel implements MouseListener{
 		constraints.gridy = 1;
 		add(leftArrow, constraints);
 		
-		rightArrow = new JLabel("\u2192");
+		rightArrow = new JLabel("\u2192", SwingConstants.LEFT);
 		rightArrow.setFont(new Font("Arial", 0, 30));
 		rightArrow.setBackground(new Color(29, 255, 29));
 		rightArrow.setForeground(Color.WHITE);
@@ -68,7 +74,7 @@ public class ControllerPanel extends JPanel implements MouseListener{
 		constraints.gridy = 1;
 		add(rightArrow, constraints);
 		
-		center = new JLabel("X");
+		center = new JLabel("\u25a0");
 		center.setFont(new Font("Arial", 0, 30));
 		center.setBackground(new Color(29, 255, 29));
 		center.setForeground(Color.WHITE);
@@ -77,18 +83,42 @@ public class ControllerPanel extends JPanel implements MouseListener{
 		constraints.gridy = 1;
 		add(center, constraints);
 		
-		oilyButton = new JButton("oily");
-		oilyButton.addMouseListener(this);
-		constraints.fill = GridBagConstraints.HORIZONTAL;
+		JPanel spaceHolder = new JPanel();
+		spaceHolder.setBackground(new Color(0, true));
 		constraints.gridx = 1;
 		constraints.gridy = 3;
+		add(spaceHolder, constraints);
+		
+		oilyButton = new JButton("Place oily patch");
+		oilyButton.setFont(new Font("Arial", 0, 14));
+		oilyButton.addMouseListener(this);
+		oilyButton.setBackground(new Color(0, true));
+		oilyButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+		oilyButton.setFocusable(false);
+		oilyButton.setContentAreaFilled(false);
+		oilyButton.setForeground(Color.white);
+		oilyButton.setPreferredSize(new Dimension(170, 25));
+		constraints.insets = new Insets(3, 7, 3, 7);
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.gridx = 0;
+		constraints.gridwidth=3;
+		constraints.gridy = 4;
 		add(oilyButton, constraints);
 		
-		stickyButton = new JButton("sticky");
+		stickyButton = new JButton("Place sticky patch");
+		stickyButton.setFont(new Font("Arial", 0, 14));
+		stickyButton.setBackground(new Color(0, true));
+		stickyButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+		stickyButton.setFocusable(false);
 		stickyButton.addMouseListener(this);
-		constraints.fill = GridBagConstraints.VERTICAL;
-		constraints.gridx = 1;
-		constraints.gridy = 4;
+		stickyButton.setContentAreaFilled(false);
+		stickyButton.setForeground(Color.WHITE);
+		stickyButton.setPreferredSize(new Dimension(170, 25));
+		constraints.insets = new Insets(3, 7, 3, 7);
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		constraints.gridwidth = 3;
+		constraints.gridx = 0;
+		constraints.gridy = 5;
 		add(stickyButton, constraints);
 	}
 
@@ -119,25 +149,17 @@ public class ControllerPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mousePressed(MouseEvent e) {	
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }

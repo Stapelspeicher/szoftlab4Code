@@ -5,12 +5,12 @@ import java.awt.Graphics;
 
 public class RobotView {
 	public static final Color robotColors[]={
-		new Color(0, 193, 63),
-		new Color(255, 152, 29),
-		new Color(255, 46, 18),
+		new Color(31, 173, 255),
 		new Color(255, 29, 119),
 		new Color(170, 64, 255),
-		new Color(31, 173, 255)
+		new Color(255, 46, 18),
+		new Color(0, 193, 63),
+		new Color(255, 152, 29)
 	};
 	private Robot robot;
 	private int colorIndex;

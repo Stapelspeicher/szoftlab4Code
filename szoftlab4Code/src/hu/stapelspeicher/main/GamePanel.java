@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
+	public static final Color BACKGROUND_COLOR = new Color(29, 29, 29);
 	private GameMapView gameMap;
 	private RobotView robots[];
 	private ArrayList<LittleRobotView> littleRobots;
@@ -16,7 +17,7 @@ public class GamePanel extends JPanel {
 	public GamePanel(){
 		setPreferredSize(new Dimension(600, 600));
 		setBorder(BorderFactory.createEmptyBorder());
-		setBackground(new Color(29, 29, 29));
+		setBackground(BACKGROUND_COLOR);
 		littleRobots = new ArrayList<LittleRobotView>();
 	}
 	
