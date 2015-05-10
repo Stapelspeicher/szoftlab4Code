@@ -1,4 +1,11 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.ui;
+
+import hu.stapelspeicher.controller.GameController;
+import hu.stapelspeicher.modell.GameMap;
+import hu.stapelspeicher.modell.Oily;
+import hu.stapelspeicher.modell.Position;
+import hu.stapelspeicher.modell.Sticky;
+import hu.stapelspeicher.modell.Trap;
 
 import java.awt.Color;
 import java.awt.Graphics;

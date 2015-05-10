@@ -1,4 +1,15 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.controller;
+
+import hu.stapelspeicher.modell.Cell;
+import hu.stapelspeicher.modell.GameMap;
+import hu.stapelspeicher.modell.LittleRobot;
+import hu.stapelspeicher.modell.Position;
+import hu.stapelspeicher.modell.Robot;
+import hu.stapelspeicher.ui.ControllerPanel;
+import hu.stapelspeicher.ui.GamePanel;
+import hu.stapelspeicher.ui.GameStartPanel;
+import hu.stapelspeicher.ui.ResultPanel;
+import hu.stapelspeicher.ui.Window;
 
 import java.util.ArrayList;
 import java.util.Random;

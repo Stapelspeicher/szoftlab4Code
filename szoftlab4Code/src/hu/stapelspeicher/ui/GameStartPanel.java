@@ -1,4 +1,6 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.ui;
+
+import hu.stapelspeicher.controller.GameController;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

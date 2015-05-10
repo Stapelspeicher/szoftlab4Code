@@ -1,4 +1,6 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.ui;
+
+import hu.stapelspeicher.controller.GameController;
 
 import java.awt.Color;
 import java.awt.Dimension;

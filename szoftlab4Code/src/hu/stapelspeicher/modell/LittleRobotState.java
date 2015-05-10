@@ -1,4 +1,4 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.modell;
 
 public enum LittleRobotState {
 	DAZED, CLEANING, NORMAL

@@ -1,4 +1,4 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.modell;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.modell;
 
 import java.util.HashMap;
 import java.util.Map;

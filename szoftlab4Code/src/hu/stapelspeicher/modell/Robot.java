@@ -1,4 +1,5 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.modell;
+
 
 /**
  * @author Ă�dĂˇm
@@ -50,7 +51,7 @@ public class Robot implements ActiveObject {
 	 * @param stickyNum - a robot hany ragaccsal indul
 	 * @param oilyNum - a robot hany olajjal indul
 	 */
-	Robot(int stickyNum, int oilyNum) {
+	public Robot(int stickyNum, int oilyNum) {
 		Logger.enterFunction("Robot(int stickyNum, int oilyNum()", this);
 		this.stickyNum = stickyNum;
 		this.oilNum = oilyNum;

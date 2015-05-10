@@ -1,4 +1,9 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.ui;
+
+import hu.stapelspeicher.controller.GameController;
+import hu.stapelspeicher.modell.GameMap;
+import hu.stapelspeicher.modell.LittleRobot;
+import hu.stapelspeicher.modell.Robot;
 
 import java.awt.Color;
 import java.awt.Dimension;

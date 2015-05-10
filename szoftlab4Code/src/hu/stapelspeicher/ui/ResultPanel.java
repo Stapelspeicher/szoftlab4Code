@@ -1,4 +1,6 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.ui;
+
+import hu.stapelspeicher.modell.Robot;
 
 import java.awt.Color;
 

@@ -1,4 +1,4 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.ui;
 
 import javax.swing.JButton;
 

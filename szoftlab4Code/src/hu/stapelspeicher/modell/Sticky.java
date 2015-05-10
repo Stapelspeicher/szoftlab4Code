@@ -1,4 +1,5 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.modell;
+
 
 /**
  * Ragacs osztaly

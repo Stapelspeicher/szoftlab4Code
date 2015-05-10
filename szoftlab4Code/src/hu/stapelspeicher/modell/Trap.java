@@ -1,4 +1,5 @@
-package hu.stapelspeicher.main;
+package hu.stapelspeicher.modell;
+
 
 /**
  * Csapda interface, amelyik osszefogja az egyes akadalyozo elemeket
