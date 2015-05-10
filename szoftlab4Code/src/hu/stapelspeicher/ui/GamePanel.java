@@ -20,14 +20,41 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * @author Barni
+ * a jatektablat es az elemeit tartalmazo/megjelenito panel
+ * egyben az uj jatek gomb listenere
+ */
 public class GamePanel extends JPanel implements MouseListener{
+	/**
+	 * hatterszin
+	 */
 	public static final Color BACKGROUND_COLOR = new Color(29, 29, 29);
+	/**
+	 * a jatekot vezerlo kontroller
+	 */
 	private GameController gc;
+	/**
+	 * a gamemap obejktum, amit ki kell rajzolni
+	 */
 	private GameMapView gameMap;
-	private RobotView robots[];
+	/**
+	 * a jatekban reszt vevo robotok grafikus objektumai
+	 */
+	private RobotView robots[];	
+	/**
+	 * a jatekban reszt vevo kisorobotok grafikus objektumai
+	 */
 	private ArrayList<LittleRobotView> littleRobots;
+	/**
+	 * megy-e meg a jatek, vagy mar veget ert
+	 */
 	private boolean ended = false;
 	
+	/**
+	 * az osztaly konstruktora, beallitja a panel stilusat
+	 * @param g a jatekot vezerlo kontroller
+	 */
 	public GamePanel(GameController g){
 		gc=g;
 		setPreferredSize(new Dimension(600, 600));
@@ -37,10 +64,19 @@ public class GamePanel extends JPanel implements MouseListener{
 		littleRobots = new ArrayList<LittleRobotView>();
 	}
 	
+	/**
+	 * a megjelenitendo jatekot allitja be
+	 * @param g a megejelenitendo jatek
+	 */
 	public void setGame(GameMap g){
 		gameMap = new GameMapView(g);
 	}
 	
+	/**
+	 * a megjelenitendo robotok grafikus objektumait hozza
+	 * letre es allitja be
+	 * @param robots a megjelenitendo robotokat tartalmazo tomb
+	 */
 	public void setRobots(Robot robots[]){
 		this.robots = new RobotView[robots.length];
 		for(int i=0; i<robots.length; i++){
@@ -48,12 +84,21 @@ public class GamePanel extends JPanel implements MouseListener{
 		}
 	}
 	
+	/**
+	 * egy kisrobotot ad a felulethez letrehozva neki
+	 * egy sajat grafikus objektumot
+	 * @param lr a hozzaadando kisrobot
+	 */
 	public void addLittleRobot(LittleRobot lr){
 		littleRobots.add(new LittleRobotView(lr));
 	}
 	
+	/**
+	 * a jatek vegen kirajzolja az uj jatek gombot
+	 */
 	public void endGame(){
 		ended = true;
+		//az uj jatek gomb letrehozasa es stilusanak beallitasa
 		JButton newGameButton = new JButton("New game");
 		newGameButton.setFont(new Font("Arial", 0, 26));
 		newGameButton.addMouseListener(this);
@@ -70,31 +115,54 @@ public class GamePanel extends JPanel implements MouseListener{
 		this.add(newGameButton, constraints);
 	}
 	
+	/**
+	 * ha veget ert a jatek egy atlatszo fekete reteget
+	 * rajzol a palya fole
+	 * @param g a grafikus objektum amire rajzolni kell
+	 */
 	private void paintEnd(Graphics g){
 		g.setColor(new Color(30, 30, 30, 100));
 		g.fillRect(0, 0, getWidth(), getHeight());
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 * kirajzolja a palyat, a robotokat, kisorobotokat, csapdakat
+	 * es a jatek vegen az atfedo reteget
+	 */
 	public void paintComponent(Graphics g){
+		//az elozo rajzol torlese
 		super.paintComponent(g);
+		//palya kirajzolasa
 		gameMap.paintMap(g);
+		//robotok kirajzolasa
 		for(RobotView r : robots){
 			r.paint(g);
 		}
+		//kisrobotok kirajzolasa
 		for(LittleRobotView lr : littleRobots){
 			lr.paint(g);
 		}
+		//csapdak kirajzolasa
 		gameMap.paintTraps(g);
+		//ha veget ert a jatek az atlatszo fekete reteg kirajzolasa
 		if(ended){
 			paintEnd(g);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 * az uj jatek gomb megnyomasa eseten ertesiti a kontrollert
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		gc.selectPlayers();
 	}
 
+	//ezekre a metodusokra csak a mouselistener interface
+	//miatt volt szukseg, funkciot nem latnek el
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {}
 
