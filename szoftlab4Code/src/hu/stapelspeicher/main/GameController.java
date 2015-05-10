@@ -47,7 +47,7 @@ public class GameController{
 			c.add(robots[i]);
 		}
 		
-		gamePanel = new GamePanel(); 
+		gamePanel = new GamePanel(this); 
 		gamePanel.setGame(game);
 		gamePanel.setRobots(robots);
 		mainWindow.setLeftPanel(gamePanel);
@@ -59,11 +59,12 @@ public class GameController{
 	}
 	
 	private void endGame(){
-		System.out.println("LELK");
+		gamePanel.endGame();
+		gamePanel.repaint();
 	}
 	
 	private void nextRound(){
-		game.decrementRounds();
+		boolean playing = game.decrementRounds();
 		for(LittleRobot lr : littleRobots){
 			lr.step();
 		}
@@ -77,6 +78,8 @@ public class GameController{
 			littleRobots.add(lr);
 			gamePanel.addLittleRobot(lr);
 		}
+		if(!playing)
+			endGame();
 	}
 	
 	public void placeOily(){
