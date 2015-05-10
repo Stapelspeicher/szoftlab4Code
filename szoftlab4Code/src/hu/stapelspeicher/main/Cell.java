@@ -10,19 +10,11 @@ import java.util.List;
  */
 
 public class Cell {
-	private List<ActiveObject> actors= new ArrayList<ActiveObject>();
+	private ActiveObject presentAO = null;
+	private ActiveObject incomingAO = null;
 	private Trap trap=null;
 	private Position pos;
 	private GameMap map;
-	
-	/**
-	 * A cellan talalhato aktorokat adja vissza.
-	 * ----CSAK A TESZTELESHEZ HASZNALT!----
-	 * @return a kert aktorok listaja
-	 */	
-	public List<ActiveObject> getAOsForTest(){
-		return actors;
-	}
 	
 	/**
 	 * A cellan talalhato csapdat adja vissza.
@@ -76,17 +68,19 @@ public class Cell {
 	public void add(ActiveObject ao) {
 		Logger.enterFunction("add(ActiveObject ao)", this);
 		
-		actors.add(ao);
+		incomingAO = ao;
 		if(trap!=null){
 			trap.stepOn(ao);
 			if(trap.abrade())
 				trap=null;
 		}	
-		for(ActiveObject actor : actors) {
-			if(actor != ao) {
-				actor.stepOn(ao);
-			}
-		}
+		
+		if(presentAO!=null)
+			presentAO.stepOn(incomingAO);
+		
+		if(incomingAO!=null)
+			presentAO = incomingAO;
+			
 		Logger.exitFunction();
 	}
 	
@@ -124,7 +118,12 @@ public class Cell {
 	public void remove(ActiveObject ao) {
 		Logger.enterFunction("remove(ActiveObject ao)", this);
 		
-		actors.remove(ao);
+		if(presentAO!=null)
+			if(presentAO.equals(ao))
+				presentAO=null;
+		if(incomingAO!=null)
+			if(incomingAO.equals(ao))
+				incomingAO=null;
 		
 		Logger.exitFunction();
 	}
@@ -137,7 +136,7 @@ public class Cell {
 		Logger.enterFunction("isEmpty()", this);
 		
 		Logger.exitFunction();
-		return actors.isEmpty();
+		return (presentAO==null && incomingAO==null);
 	}
 	
 	/**

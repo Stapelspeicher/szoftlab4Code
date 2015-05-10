@@ -138,6 +138,7 @@ public class LittleRobot implements ActiveObject {
 				state = LittleRobotState.NORMAL;
 				currCell.removeTrap();
 			}
+			break;
 		default:
 			break;
 		}

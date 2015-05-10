@@ -93,23 +93,24 @@ public class GameController{
 	}
 	
 	public void robotStep(int x, int y){
-		if(robotsAlive>0){
+		if(robotsAlive>1 || (players==1 && robotsAlive>0)){
 			robots[currentRobot].addVelocity(new Position(x, y));
 			robots[currentRobot].step();
 			if(!robots[currentRobot].isAlive()){
 				robotsAlive--;
 			}
-			if(robotsAlive==0){
+			if(robotsAlive==0 || (players>1 && robotsAlive==1)){
 				endGame();
 			}
-			int counter = 1;
 			currentRobot = (currentRobot+1)%players;
-			while(!robots[currentRobot].isAlive() && counter<players){
-				counter++;
-				currentRobot = (currentRobot+1)%players;
-			}
 			if(currentRobot==0){
 				nextRound();
+			}
+			while(!robots[currentRobot].isAlive()){
+				currentRobot = (currentRobot+1)%players;
+				if(currentRobot==0){
+					nextRound();
+				}
 			}
 			resultPanel.setActive(currentRobot);
 			mainWindow.repaint();
