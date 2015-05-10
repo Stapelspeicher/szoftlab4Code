@@ -1,8 +1,5 @@
 package hu.stapelspeicher.modell;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A palyat felepito elemeket megvalosito osztaly
  * @author Csongor
@@ -17,20 +14,16 @@ public class Cell {
 	private GameMap map;
 	
 	/**
-	 * A cellan talalhato csapdat adja vissza.
-	 * ----CSAK A TESZTELESHEZ HASZNALT!----
-	 * @return a kert csapda
+	 * @return a cellan talalhato csapda
 	 */
-	public Trap getTrapForTest(){
+	public Trap getTrap(){
 		return trap;
 	}
 	
 	/**
-	 * A cella poziciojat adja vissza.
-	 * ----CSAK A TESZTELESHEZ HASZNALT!----
-	 * @return a kert pozicio
+	 * @return a cella koordinatai
 	 */
-	public Position getPositionForTest(){
+	public Position getPosition(){
 		return pos;
 	}
 	
@@ -39,11 +32,7 @@ public class Cell {
 	 * @param pos Az uj pozicio
 	 */
 	public void setPosition(Position pos){
-		Logger.enterFunction("setPosition(Position pos)", this);
-		
 		this.pos = pos;
-		
-		Logger.exitFunction();
 	}
 	
 	/**
@@ -51,11 +40,7 @@ public class Cell {
 	 * @param gm A jatek GameMap-je
 	 */
 	public void setMap(GameMap gm){
-		Logger.enterFunction("setMap(GameMap gm)", this);
-		
 		this.map = gm;
-		
-		Logger.exitFunction();
 	}
 	
 	/**
@@ -66,8 +51,6 @@ public class Cell {
 	 * @param ao Az uj mozgo objektum
 	 */
 	public void add(ActiveObject ao) {
-		Logger.enterFunction("add(ActiveObject ao)", this);
-		
 		incomingAO = ao;
 		if(trap!=null){
 			trap.stepOn(ao);
@@ -80,8 +63,6 @@ public class Cell {
 		
 		if(incomingAO!=null)
 			presentAO = incomingAO;
-			
-		Logger.exitFunction();
 	}
 	
 	/**
@@ -89,11 +70,7 @@ public class Cell {
 	 * @param t Az uj folt
 	 */
 	public void add(Trap t) {
-		Logger.enterFunction("add(Trap t)", this);
-		
 		trap = t;
-		
-		Logger.exitFunction();
 	}
 	
 	/**
@@ -103,29 +80,21 @@ public class Cell {
 	 * @return A kert cella
 	 */
 	public Cell getCellFromHere(Position p) {
-		Logger.enterFunction("getCellFromHere(Position p)", this);		
-		
 		Cell c = map.getCell(pos.add(p));
-		
-		Logger.exitFunction();
 		return c;
-		}
+	}
 	
 	/**
 	 * A cellarol eltavolitja a megadott mozgo objektumot
 	 * @param ao Az eltavolitando mozgo objektum
 	 */
 	public void remove(ActiveObject ao) {
-		Logger.enterFunction("remove(ActiveObject ao)", this);
-		
 		if(presentAO!=null)
 			if(presentAO.equals(ao))
 				presentAO=null;
 		if(incomingAO!=null)
 			if(incomingAO.equals(ao))
 				incomingAO=null;
-		
-		Logger.exitFunction();
 	}
 	
 	/**
@@ -133,9 +102,6 @@ public class Cell {
 	 * @return A cella ures (true)
 	 */
 	public boolean isEmpty() {
-		Logger.enterFunction("isEmpty()", this);
-		
-		Logger.exitFunction();
 		return (presentAO==null && incomingAO==null);
 	}
 	
@@ -145,14 +111,10 @@ public class Cell {
 	 * @return A ket cella tavolsaga
 	 */
 	public double getDistanceFromCell(Cell c) {
-		Logger.enterFunction("getDistanceFromCell(Cell c)", this);
-		
 		int xDistance = c.pos.getX() - pos.getX();
 		int yDistance = c.pos.getY() - pos.getY();
 		if(xDistance < 0) xDistance *= -1;
 		if(yDistance < 0) yDistance *= -1;
-		
-		Logger.exitFunction();
 		return xDistance + yDistance;
 	}
 	
@@ -162,11 +124,12 @@ public class Cell {
 	 * @return A szabad szomszedos cella
 	 */
 	public Cell getFreeNeighbouringCell() {
-		Logger.enterFunction("getFreeNeighbouringCell()", this);
-		Logger.exitFunction();
 		return map.getFreeNeighbouringCell(pos);
 	}
 
+	/**
+	 * Szaritja a csapdat, es ha kiszaradt, akkor torli.
+	 */
 	public void dry() {
 		if(trap!=null){
 			if(trap.dry())
@@ -174,6 +137,10 @@ public class Cell {
 		}
 	}
 
+	/**
+	 * Megkeresi a legkozelebbi csapdat.
+	 * @return A legkozelebbi csapda relativ pozicioja.
+	 */
 	public Position getNearestTrapRelativePosition() {
 		if(trap!=null) return new Position(0,0);
 		boolean limitNotReached = true;
@@ -212,6 +179,9 @@ public class Cell {
 		return null;
 	}
 
+	/**
+	 * Eltavolitja a csapdat a cellarol.
+	 */
 	public void removeTrap() {
 		trap=null;
 	}

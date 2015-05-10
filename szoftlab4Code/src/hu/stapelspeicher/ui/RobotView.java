@@ -47,8 +47,8 @@ public class RobotView {
 	 */
 	public void paint(Graphics g){
 		g.setColor(robotColors[colorIndex]);
-		int x = robot.getCell().getPositionForTest().getX();
-		int y = robot.getCell().getPositionForTest().getY();
+		int x = robot.getCell().getPosition().getX();
+		int y = robot.getCell().getPosition().getY();
 		if(robot.isAlive())
 		g.fillRect(GameMapView.BORDER_WIDTH+x*(GameMapView.CELL_GAP+GameMapView.CELL_SIZE),
 				GameMapView.BORDER_WIDTH+(GameController.GAMEMAP_SIZE-y-1)*(GameMapView.CELL_GAP+GameMapView.CELL_SIZE),

@@ -30,8 +30,8 @@ public class LittleRobotView {
 	 */
 	public void paint(Graphics g){
 		g.setColor(Color.YELLOW);
-		int x = littleRobot.getCell().getPositionForTest().getX();
-		int y = littleRobot.getCell().getPositionForTest().getY();
+		int x = littleRobot.getCell().getPosition().getX();
+		int y = littleRobot.getCell().getPosition().getY();
 		if(littleRobot.isAlive())
 		g.fillRect(GameMapView.BORDER_WIDTH+x*(GameMapView.CELL_GAP+GameMapView.CELL_SIZE)+5,
 				GameMapView.BORDER_WIDTH+(GameController.GAMEMAP_SIZE-y-1)*(GameMapView.CELL_GAP+GameMapView.CELL_SIZE)+5,

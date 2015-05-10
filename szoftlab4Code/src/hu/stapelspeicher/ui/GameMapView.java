@@ -94,7 +94,7 @@ public class GameMapView{
 		g.setColor(Color.WHITE);
 		for(int i=0; i<game.getHeight(); i++){
 			for(int j=0; j<game.getWidth(); j++){
-				Trap t = game.getCell(new Position(i, j)).getTrapForTest();
+				Trap t = game.getCell(new Position(i, j)).getTrap();
 				if(t!=null){
 					if(t instanceof Oily){
 						paintOily(g, i, j);

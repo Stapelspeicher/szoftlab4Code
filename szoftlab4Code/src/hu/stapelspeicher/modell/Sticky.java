@@ -11,32 +11,26 @@ public class Sticky implements Trap
 
 	private int abrasion = 4;
 	
-	/**
-	 * A ragacsfolt kopottsagat adja vissza.
-	 * ----CSAK A TESZTELESHEZ HASZNALT!----
-	 * @return a kert kopottsag
-	 */
-	public int getAbrasionForTest(){
-		return abrasion;
-	}
-	
 	/* (non-Javadoc)
 	 * @see hu.stapelspeicher.main.Trap#stepOn(hu.stapelspeicher.main.ActiveObject)
 	 */
 	@Override
 	public void stepOn(ActiveObject ao)
 	{
-		// TODO Auto-generated method stub
-		Logger.enterFunction("stepOn(ActiveObject ao)", this);
-		ao.stickyEffect();
-		Logger.exitFunction();
+		ao.stickyEffect();;
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.Trap#dry()
+	 */
 	@Override
 	public boolean dry() {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.Trap#abrade()
+	 */
 	@Override
 	public boolean abrade() {
 		abrasion--;

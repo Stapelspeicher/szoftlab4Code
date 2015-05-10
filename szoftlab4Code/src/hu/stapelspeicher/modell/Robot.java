@@ -20,29 +20,23 @@ public class Robot implements ActiveObject {
 	}
 	
 	/**
-	 * A robot sebesseget adja vissza.
-	 * ----CSAK A TESZTELESHEZ HASZNALT!----
-	 * @return a kert sebesseg
+	 * @return a robot sebessege
 	 */	
-	public Position getVelocityForTest(){
+	public Position getVelocity(){
 		return velocity;
 	}
 	
 	/**
-	 * A robot ragacskeszletet adja vissza.
-	 * ----CSAK A TESZTELESHEZ HASZNALT!----
-	 * @return a kert ragacskeszlet
+	 * @return a robot ragacskeszlete
 	 */	
-	public int getStickyForTest(){
+	public int getSticky(){
 		return stickyNum;
 	}
 	
 	/**
-	 * A robot olajkeszletet adja vissza.
-	 * ----CSAK A TESZTELESHEZ HASZNALT!----
-	 * @return a kert olajkeszlet
+	 * @return a robot olajkeszlete
 	 */	
-	public int getOilyForTest(){
+	public int getOily(){
 		return oilNum;
 	}
 	
@@ -52,38 +46,30 @@ public class Robot implements ActiveObject {
 	 * @param oilyNum - a robot hany olajjal indul
 	 */
 	public Robot(int stickyNum, int oilyNum) {
-		Logger.enterFunction("Robot(int stickyNum, int oilyNum()", this);
 		this.stickyNum = stickyNum;
 		this.oilNum = oilyNum;
 		velocity = new Position(0, 0);
 		alive = true;
-		Logger.exitFunction();
 	}
 
 	/**
 	 * A robot elhelyezi a ragacsot, amennyiben van neki legalabb egy elhelyezheto ragacsa
 	 */
 	public void placeSticky() {
-		Logger.enterFunction("placeSticky()", this);
 		if (stickyNum > 0){
 			currCell.add(new Sticky());
 			stickyNum--;
 		}
-			
-		Logger.exitFunction();
 	}
 
 	/**
 	 * A robot elhelyezi az olajfoltot, amennyiben van neki legalabb egy elhelyezheto olaja
 	 */
 	public void placeOily() {
-		Logger.enterFunction("placeOily()", this);
 		if (oilNum > 0){
 			currCell.add(new Oily());
 			oilNum--;
 		}
-			
-		Logger.exitFunction();
 	}
 
 	/**
@@ -91,14 +77,12 @@ public class Robot implements ActiveObject {
 	 * @param p - ez hatarozza meg, hogy mennyivel es milyen iranyba valtozik meg a sebesseg
 	 */
 	public void addVelocity(Position p) {
-		Logger.enterFunction("addVelocity(Position p)", this);
 		if(oily){
 			return;
 		}
 		else{
 			velocity = velocity.add(p);
 		}
-		Logger.exitFunction();
 	}
 
 	/* (non-Javadoc)
@@ -106,16 +90,12 @@ public class Robot implements ActiveObject {
 	 */
 	@Override
 	public void stepOn(ActiveObject ao) {
-		Logger.enterFunction("stepOn(ActiveObject ao)", this);
 		ao.collideWithRobot(this);
-		Logger.exitFunction();
 	}
 
 	@Override
 	public void oilyEffect() {
-		Logger.enterFunction("oilyEffect()", this);
 		oily = true;
-		Logger.exitFunction();
 	}
 
 	/* (non-Javadoc)
@@ -123,9 +103,7 @@ public class Robot implements ActiveObject {
 	 */
 	@Override
 	public void stickyEffect() {
-		Logger.enterFunction("stickyEffect()", this);
 		velocity = velocity.divide(new Position(2, 2));
-		Logger.exitFunction();
 	}
 
 	/* (non-Javadoc)
@@ -133,7 +111,6 @@ public class Robot implements ActiveObject {
 	 */
 	@Override
 	public void collideWithRobot(Robot other) {
-		Logger.enterFunction("collideWithRobot(Robot other)", this);
 		if(velocity.compareTo(other.velocity)>0){
 			other.die();
 			velocity=velocity.add(other.velocity).divide(new Position(2, 2));
@@ -146,7 +123,6 @@ public class Robot implements ActiveObject {
 			other.die();
 			die();
 		}
-		Logger.exitFunction();
 	}
 	
 	
@@ -155,10 +131,8 @@ public class Robot implements ActiveObject {
 	 */
 	@Override
 	public void die() {
-		Logger.enterFunction("die()", this);
 		currCell.remove(this);
 		alive = false;
-		Logger.exitFunction();
 	}	
 
 	/* (non-Javadoc)
@@ -166,9 +140,7 @@ public class Robot implements ActiveObject {
 	 */
 	@Override
 	public void setCell(Cell c) {
-		Logger.enterFunction("setCell(Cell c)", this);
 		currCell = c;
-		Logger.exitFunction();
 	}
 
 	/* (non-Javadoc)
@@ -176,7 +148,6 @@ public class Robot implements ActiveObject {
 	 */
 	@Override
 	public void step() {
-		Logger.enterFunction("step()", this);
 		Cell newCell = currCell.getCellFromHere(velocity);
 		if (newCell == null) {
 			this.die();
@@ -186,7 +157,6 @@ public class Robot implements ActiveObject {
 			currCell=newCell;
 			newCell.add(this);
 		}
-		Logger.exitFunction();
 	}
 
 	/* (non-Javadoc)
@@ -194,17 +164,19 @@ public class Robot implements ActiveObject {
 	 */
 	@Override
 	public Cell getCell() {
-		Logger.enterFunction("getCell()", this);
-		Logger.exitFunction();
 		return this.currCell;
 	}
 	
+	/**
+	 * @return a robot altal megtett tavolsag
+	 */
 	public int getDistance() {
-		Logger.enterFunction("getDistance", this);
-		Logger.exitFunction();
 		return distance;
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.ActiveObject#collideWithLittleRobot(hu.stapelspeicher.modell.LittleRobot)
+	 */
 	@Override
 	public void collideWithLittleRobot(LittleRobot other) {
 		other.die();

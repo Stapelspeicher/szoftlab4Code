@@ -28,9 +28,7 @@ public class GameMap
 	 * @param rounds a korok kivant szama
 	 */
 	public void setRounds(int rounds){
-		Logger.enterFunction("setRounds(int rounds)", this);
 		this.rounds = rounds;
-		Logger.exitFunction();
 	}
 	
 	/**
@@ -41,12 +39,10 @@ public class GameMap
 	 */
 	public GameMap(Integer x, Integer y)
 	{
-		Logger.enterFunction("GameMap(Integer x, Integer y)", this);
 		cells = new Cell[x][y];
 		xlength = x;
 		ylength = y;
 		rounds=10;
-		Logger.exitFunction();
 	}
 
 	/**
@@ -57,8 +53,6 @@ public class GameMap
 	 */
 	public Cell getCell(Position p)
 	{
-		Logger.enterFunction("getCell(Position p)", this);
-		Logger.exitFunction();
 		if(p.getX()<0 || p.getX() >= xlength || p.getY()<0 || p.getY() >= ylength)
 			return null;
 		return cells[p.getX()][p.getY()];
@@ -70,12 +64,10 @@ public class GameMap
 	 */
 	public void addCell(Position p)
 	{
-		Logger.enterFunction("addCell(Position p)", this);
 		Cell c = new Cell();
 		c.setPosition(p);
 		c.setMap(this);
 		cells[p.getX()][p.getY()] = c;
-		Logger.exitFunction();
 	}
 
 	/**
@@ -85,9 +77,7 @@ public class GameMap
 	 * @return egy ures szomszedos cella, vagy null ha nincs ilyen
 	 */
 	public Cell getFreeNeighbouringCell(Position p)
-	{
-		Logger.enterFunction("getFreeNeigbouring(Position p)", this);
-		
+	{		
 		Cell c;
 		
 		if(p.getX()>0){
@@ -145,8 +135,6 @@ public class GameMap
 				if(c.isEmpty())
 					return c;
 		}
-		
-		Logger.exitFunction();
 		return null;
 
 	}

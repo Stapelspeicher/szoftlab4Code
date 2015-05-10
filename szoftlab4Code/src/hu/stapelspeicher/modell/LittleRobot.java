@@ -42,6 +42,9 @@ public class LittleRobot implements ActiveObject {
 	}
 	
 	
+	/**
+	 * ha szukseges, a kisrobot elkezdi a takaritast
+	 */
 	private void startCleaningIfNeeded(){
 		Position p = currCell.getNearestTrapRelativePosition();
 		if(p!=null){
@@ -53,25 +56,39 @@ public class LittleRobot implements ActiveObject {
 
 	}
 	
+	/**
+	 * beallitja a kisrobot allapotat
+	 * @param newState az uj allapot
+	 */
 	public void setState(LittleRobotState newState){
 		state = newState;
 	}
 	
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.ActiveObject#stepOn(hu.stapelspeicher.modell.ActiveObject)
+	 */
 	@Override
 	public void stepOn(ActiveObject ao) {
-		Logger.enterFunction("stepOn(ActiveObject ao)", this);
 		ao.collideWithLittleRobot(this);
-		Logger.exitFunction();
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.ActiveObject#oilyEffect()
+	 */
 	@Override
 	public void oilyEffect() {
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.ActiveObject#stickyEffect()
+	 */
 	@Override
 	public void stickyEffect() {
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.ActiveObject#collideWithRobot(hu.stapelspeicher.modell.Robot)
+	 */
 	@Override
 	public void collideWithRobot(Robot other) {
 		state = LittleRobotState.DAZED;
@@ -85,12 +102,18 @@ public class LittleRobot implements ActiveObject {
 		else die();
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.ActiveObject#die()
+	 */
 	@Override
 	public void die() {
 		currCell.remove(this);
 		alive = false;
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.ActiveObject#setCell(hu.stapelspeicher.modell.Cell)
+	 */
 	@Override
 	public void setCell(Cell c) {
 		currCell = c;
@@ -106,6 +129,9 @@ public class LittleRobot implements ActiveObject {
 		}	
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.ActiveObject#step()
+	 */
 	@Override
 	public void step() {
 		Cell c = null;
@@ -145,11 +171,17 @@ public class LittleRobot implements ActiveObject {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.ActiveObject#getCell()
+	 */
 	@Override
 	public Cell getCell() {
 		return currCell;
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.ActiveObject#collideWithLittleRobot(hu.stapelspeicher.modell.LittleRobot)
+	 */
 	@Override
 	public void collideWithLittleRobot(LittleRobot other) {
 		state = LittleRobotState.DAZED;

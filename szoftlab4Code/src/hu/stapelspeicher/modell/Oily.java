@@ -25,17 +25,21 @@ public class Oily implements Trap
 	@Override
 	public void stepOn(ActiveObject ao)
 	{
-		Logger.enterFunction("stepOn(ActiveObject ao)", this);
 		ao.oilyEffect();
-		Logger.exitFunction();
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.Trap#dry()
+	 */
 	@Override
 	public boolean dry() {
 		wetness--;
 		return (wetness==0);
 	}
 
+	/* (non-Javadoc)
+	 * @see hu.stapelspeicher.modell.Trap#abrade()
+	 */
 	@Override
 	public boolean abrade() {
 		return false;

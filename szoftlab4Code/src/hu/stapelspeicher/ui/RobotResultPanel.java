@@ -104,18 +104,18 @@ public class RobotResultPanel extends JPanel {
 	public void displayActive(){
 		distanceValueLabel.setText(new Integer(robot.getDistance()).toString());
 		
-		xLabel.setText(xLabelChar(robot.getVelocityForTest().getX()));
-		xValueLabel.setText(new Integer(Math.abs(robot.getVelocityForTest().getX())).toString());
+		xLabel.setText(xLabelChar(robot.getVelocity().getX()));
+		xValueLabel.setText(new Integer(Math.abs(robot.getVelocity().getX())).toString());
 		xPanel.setVisible(true);
 		
-		yLabel.setText(yLabelChar(robot.getVelocityForTest().getY()));
-		yValueLabel.setText(new Integer(Math.abs(robot.getVelocityForTest().getY())).toString());
+		yLabel.setText(yLabelChar(robot.getVelocity().getY()));
+		yValueLabel.setText(new Integer(Math.abs(robot.getVelocity().getY())).toString());
 		yPanel.setVisible(true);
 		
-		oilyValueLabel.setText(new Integer(robot.getOilyForTest()).toString());
+		oilyValueLabel.setText(new Integer(robot.getOily()).toString());
 		oilyPanel.setVisible(true);
 		
-		stickyValueLabel.setText(new Integer(robot.getStickyForTest()).toString());
+		stickyValueLabel.setText(new Integer(robot.getSticky()).toString());
 		stickyPanel.setVisible(true);
 	}
 	
@@ -167,28 +167,28 @@ public class RobotResultPanel extends JPanel {
 		distancePanel = setUpPanel(distanceLabel, distanceValueLabel);
 		
 		//az x sebesseg megjelenitesenek beallitasa
-		xLabel = new JLabel(xLabelChar(robot.getVelocityForTest().getX()), SwingConstants.LEFT);
-		xValueLabel = new JLabel(new Integer(Math.abs(robot.getVelocityForTest().getX())).toString(), SwingConstants.RIGHT);
+		xLabel = new JLabel(xLabelChar(robot.getVelocity().getX()), SwingConstants.LEFT);
+		xValueLabel = new JLabel(new Integer(Math.abs(robot.getVelocity().getX())).toString(), SwingConstants.RIGHT);
 		formatLabel(xLabel);
 		formatLabel(xValueLabel);
 		xPanel = setUpPanel(xLabel, xValueLabel);
 		
 		//az y sebesseg megjelenitesenek beallitasa
-		yLabel = new JLabel(yLabelChar(robot.getVelocityForTest().getY()), SwingConstants.LEFT);
-		yValueLabel = new JLabel(new Integer(Math.abs(robot.getVelocityForTest().getY())).toString(), SwingConstants.RIGHT);
+		yLabel = new JLabel(yLabelChar(robot.getVelocity().getY()), SwingConstants.LEFT);
+		yValueLabel = new JLabel(new Integer(Math.abs(robot.getVelocity().getY())).toString(), SwingConstants.RIGHT);
 		formatLabel(yLabel);
 		formatLabel(yValueLabel);
 		yPanel = setUpPanel(yLabel, yValueLabel);
 		
 		//az olajfoltok szamanak megjelenitesenek beallitasa
-		oilyValueLabel = new JLabel(new Integer(robot.getOilyForTest()).toString(), SwingConstants.RIGHT);
+		oilyValueLabel = new JLabel(new Integer(robot.getOily()).toString(), SwingConstants.RIGHT);
 		JLabel oilyLabel = new JLabel("Oily patches", SwingConstants.LEFT);
 		formatLabel(oilyLabel);
 		formatLabel(oilyValueLabel);
 		oilyPanel = setUpPanel(oilyLabel, oilyValueLabel);
 		
 		//a ragacsfoltok szamanak megjelenitesenek beallitasa
-		stickyValueLabel = new JLabel(new Integer(robot.getStickyForTest()).toString(), SwingConstants.RIGHT);
+		stickyValueLabel = new JLabel(new Integer(robot.getSticky()).toString(), SwingConstants.RIGHT);
 		JLabel stickyLabel = new JLabel("Sticky patches", SwingConstants.LEFT);
 		formatLabel(stickyLabel);
 		formatLabel(stickyValueLabel);
